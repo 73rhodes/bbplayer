@@ -1,13 +1,15 @@
-BBPlayer.JS
+bbplayer.js
 ===========
 
-Simple HTML5 Audio Player
+A Simple HTML5 Audio Player
 
 About
 -----
 
-This script lets you add multiple audio tracks to the HTML5 <audio> element and set up your own 
-control buttons and CSS styles. The focus is on keeping it simple & easy to set up and customize.
+bbplayer.js is a simple HTML5 Audio player that lets you add multiple source tracks to the HTML5 
+<audio> element and set up your own control buttons and CSS styles. The focus is on keeping it 
+simple & easy to set up and customize.
+
 The main features it supports are:
 
 1. Create a playlist of multiple tracks
