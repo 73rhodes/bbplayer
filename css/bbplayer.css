@@ -3,7 +3,5 @@ Optional styling for bbplayer elements.
 */
 
 .bbplayer .bb-playing {
-  background: #6666FF;
-  border: 1px solid gray;
-  border-radius: 9px;
+  color: green;
 }
