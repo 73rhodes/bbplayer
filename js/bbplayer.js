@@ -98,7 +98,6 @@
   // Set current source for audio to given track number
   BBPlayer.prototype.loadTrack = function (trackNumber) {
     var source  = this.bbaudio.find("source").eq(trackNumber).attr('src');
-    alert("source: " + source + ", src: " + this.bbaudio.get(0).src + ", currentSrc: " + this.bbaudio.get(0).currentSrc);
     this.bbaudio.get(0).src = source;
     this.currentTrack = trackNumber;
   };
