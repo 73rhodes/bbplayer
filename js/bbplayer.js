@@ -81,17 +81,6 @@
 
     var playButton = this.bbplayer.find(".bb-play");
 
-    // TODO this button changing stuff doesn't need to be here it can be
-    // TODO in the button handler code since it doesn't hinge on audio.paused()
-    /*
-    if (this.state === 'paused') {
-      playButton.removeClass("bb-playing");
-      playButton.addClass("bb-paused");
-    } else {
-      playButton.removeClass("bb-paused");
-      playButton.addClass("bb-playing");
-    }
-    // */
   };
 
 
