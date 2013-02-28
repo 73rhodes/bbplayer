@@ -68,19 +68,13 @@
 
   // Update display
   BBPlayer.prototype.updateDisplay = function () {
-
     var audioElem = this.bbaudio.get(0);
     var duration  = toTimeString(Math.ceil(audioElem.duration));
     var elapsed   = toTimeString(Math.ceil(audioElem.currentTime));
     var title     = parseTitle(audioElem.currentSrc);
-    var paused    = audioElem.paused;
-
     this.bbplayer.find('.bb-trackLength').html(duration);
     this.bbplayer.find('.bb-trackTime').html(elapsed);
     this.bbplayer.find('.bb-trackTitle').html(title);
-
-    var playButton = this.bbplayer.find(".bb-play");
-
   };
 
 
