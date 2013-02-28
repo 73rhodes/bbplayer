@@ -7,7 +7,7 @@ About
 -----
 
 bbplayer.js is a simple HTML5 Audio player that lets you add multiple source tracks to the HTML5 
-<audio> element and set up your own control buttons and CSS styles. The focus is on keeping it 
+audio element and add your own controls. The focus is on keeping it 
 simple & easy to set up and customize.
 
 The main features it supports are:
