@@ -40,4 +40,4 @@ Then include **bbplayer.js**:
     <script src="js/jquery.js"></script>
     <script src="js/bbplayer.js"></script>
 
-See bbplayer.html for an example.
+See **bbplayer.html** for an example.
