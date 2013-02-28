@@ -68,30 +68,13 @@
 
   // Update display
   BBPlayer.prototype.updateDisplay = function () {
-
     var audioElem = this.bbaudio.get(0);
     var duration  = toTimeString(Math.ceil(audioElem.duration));
     var elapsed   = toTimeString(Math.ceil(audioElem.currentTime));
     var title     = parseTitle(audioElem.currentSrc);
-    var paused    = audioElem.paused;
-
     this.bbplayer.find('.bb-trackLength').html(duration);
     this.bbplayer.find('.bb-trackTime').html(elapsed);
     this.bbplayer.find('.bb-trackTitle').html(title);
-
-    var playButton = this.bbplayer.find(".bb-play");
-
-    // TODO this button changing stuff doesn't need to be here it can be
-    // TODO in the button handler code since it doesn't hinge on audio.paused()
-    /*
-    if (this.state === 'paused') {
-      playButton.removeClass("bb-playing");
-      playButton.addClass("bb-paused");
-    } else {
-      playButton.removeClass("bb-paused");
-      playButton.addClass("bb-playing");
-    }
-    // */
   };
 
 
