@@ -1,7 +1,8 @@
 /*global $, document, alert*/
+
 (function () {
 
-  //Pad a number with leading zeros
+//Pad a number with leading zeros
   function zeroPad(number, places) {
     var zeros = places - number.toString().length + 1;
     return new Array(+(zeros > 0 && zeros)).join("0") + number;
@@ -78,20 +79,26 @@
     this.bbplayer.find('.bb-trackTime').html(elapsed);
     this.bbplayer.find('.bb-trackTitle').html(title);
 
-    var playButton = this.bbplayer.find(".bb-play > i");
+    var playButton = this.bbplayer.find(".bb-play");
+
+    // TODO this button changing stuff doesn't need to be here it can be
+    // TODO in the button handler code since it doesn't hinge on audio.paused()
+    /*
     if (this.state === 'paused') {
-      playButton.removeClass();
-      playButton.addClass("icon-play");
+      playButton.removeClass("bb-playing");
+      playButton.addClass("bb-paused");
     } else {
-      playButton.removeClass();
-      playButton.addClass("icon-pause");
+      playButton.removeClass("bb-paused");
+      playButton.addClass("bb-playing");
     }
+    // */
   };
 
 
   // Set current source for audio to given track number
   BBPlayer.prototype.loadTrack = function (trackNumber) {
     var source  = this.bbaudio.find("source").eq(trackNumber).attr('src');
+    alert("source: " + source + ", src: " + this.bbaudio.get(0).src + ", currentSrc: " + this.bbaudio.get(0).currentSrc);
     this.bbaudio.get(0).src = source;
     this.currentTrack = trackNumber;
   };
@@ -134,11 +141,18 @@
   BBPlayer.prototype.play = function () {
     this.bbaudio.get(0).play();
     this.state = "playing";
+    var playButton = this.bbplayer.find(".bb-play");
+    playButton.removeClass("bb-paused");
+    playButton.addClass("bb-playing");
   };
 
   BBPlayer.prototype.pause = function () {
     this.bbaudio.get(0).pause();
     this.state = "paused";
+    var playButton = this.bbplayer.find(".bb-play");
+    playButton.removeClass("bb-playing");
+    playButton.addClass("bb-paused");
+
   };
 
   // Set up button click handlers
@@ -181,12 +195,11 @@
     var self = this;
     self.setAudioEventHandlers();
     self.loadSources();
-    self.loadTrack(0);
+    self.currentTrack = 0;
     self.setClickHandlers();
     self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
   };
 
-  // TODO don't let this float around in global document space
   var bbplayers = [];
 
   function stopAllBBPlayers() {
