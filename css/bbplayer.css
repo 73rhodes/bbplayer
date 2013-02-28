@@ -2,10 +2,71 @@
 Optional styling for bbplayer elements.
 */
 
-.bbplayer .bb-playing {
-  background: url('img/play.png') no-repeat fixed center;
+.bbplayer {
+  color: #BDBDBD;
+}
+
+.bb-play {
+  display: inline-block;
+  vertical-align: middle;
   height: 32px;
   width:  32px;
-  border: 1px solid gray;
-  border-radius: 10px; 
+  border: 4px solid #EEE;
+  border-radius: 19px; 
+  background: transparent; 
+  background-image: url('../images/play.png');
+  background-repeat: no-repeat;
+  background-position: 6px center;
+  cursor: pointer;
+}
+
+.bb-playing {
+  vertical-align: middle;
+  background-image: url('../images/pause.png');
+  background-position: center center;
+}
+
+.bb-forward {
+  vertical-align: middle;
+  display: inline-block;
+  height: 32px;
+  width:  32px;
+  background: transparent;
+  background-image: url('../images/forward.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.bb-rewind {
+  vertical-align: middle;
+  display: inline-block;
+  height: 32px;
+  width:  32px;
+  background: transparent;
+  background-image: url('../images/rewind.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.bb-trackTime {
+  vertical-align: middle;
+  line-height: 32px;
+  display: inline-block;
+  height: 32px;
+}
+
+.bb-trackLength {
+  vertical-align: middle;
+  line-height: 32px;
+  display: inline-block;
+  height: 32px;
+}
+
+.bb-trackTitle {
+  vertical-align: middle;
+  line-height: 32px;
+  display: inline-block;
+  height: 32px;
 }
