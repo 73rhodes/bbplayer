@@ -97,6 +97,7 @@
     this.bbaudio.get(0).src = source;
     this.currentTrack = trackNumber;
     console.log('audio preload attr: ' + this.bbaudio.get(0).preload);
+    console.log('audio preload readyState: ' + this.bbaudio.get(0).readyState);
   };
 
 
