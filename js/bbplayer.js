@@ -19,7 +19,10 @@
 
   // Convert seconds to mm:ss format
   function toTimeString(seconds) {
-    console.log('toTimeString: seconds = ' + seconds);
+    if (seconds === NaN) {
+      console.log('toTimeString: seconds = ' + seconds);
+      return "--:--";
+    }
     var minutes = Math.floor(seconds / 60);
     seconds = seconds - minutes * 60;
     return zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
@@ -98,14 +101,11 @@
     var source  = this.bbaudio.find("source").eq(trackNumber).attr('src');
     audioElem.src = source;
     this.currentTrack = trackNumber;
-    console.log('audio preload attr: ' + audioElem.preload);
-    console.log('audio preload readyState: ' + audioElem.readyState);
   };
 
 
   // Load next track in playlist
   BBPlayer.prototype.loadNext = function () {
-    console.log('BBPlayer::loadNext: entering');
     var trackCount   = this.bbaudio.find("source").length;
     this.loadTrack((1 + this.currentTrack) % trackCount);
   };
@@ -113,7 +113,6 @@
 
   // Load previous track in playlist
   BBPlayer.prototype.loadPrevious = function () {
-    console.log('BBPlayer::loadPrevious: entering');
     var trackCount = this.bbaudio.find('source').length;
     var newTrack = (this.currentTrack + (trackCount - 1)) % trackCount;
     this.loadTrack(newTrack);
@@ -123,11 +122,9 @@
   // Set up event handlers for audio element events
   BBPlayer.prototype.setAudioEventHandlers = function () {
 
-    console.log('BBPlayer::setAudioEventHandlers: entering');
     // Update display and continue play when song has loaded
     var self = this;
     self.bbaudio.on('canplay', function () {
-      console.log('BBPlayer: event canplay');
       if (self.state === 'playing') {
         console.log('BBPlayer: canplay event continuing play');
         $(this).get(0).play();
@@ -137,14 +134,12 @@
 
     // Load next track when current one ends
     self.bbaudio.on('ended', function () {
-      console.log('BBPlayer: event audio ended, loading next');
       self.loadNext();
     });
   };
 
 
   BBPlayer.prototype.play = function () {
-    console.log('BBPlayer::play: entering');
     this.bbaudio.get(0).play();
     this.state = "playing";
     var playButton = this.bbplayer.find(".bb-play");
@@ -153,7 +148,6 @@
   };
 
   BBPlayer.prototype.pause = function () {
-    console.log('BBPlayer::pause: entering');
     this.bbaudio.get(0).pause();
     this.state = "paused";
     var playButton = this.bbplayer.find(".bb-play");
@@ -164,26 +158,21 @@
   // Set up button click handlers
   BBPlayer.prototype.setClickHandlers = function () {
 
-    console.log('BBPlayer::setClickHandlers: entering');
     var self = this;
     var audioElem = self.bbaudio.get(0);
 
     // Activate fast-forward
     self.bbplayer.find('.bb-forward').click(function () {
-      console.log('BBPlayer: forward button clicked, loading next');
       self.loadNext();
     });
 
     // Toggle play / pause
     self.bbplayer.find('.bb-play').click(function () {
-      console.log('BBPlayer: play button clicked');
       if (self.state === "paused") { //(audioElem.paused) {
         stopAllBBPlayers();
         self.state = "playing";
-        console.log('BBPlayer: play button starting play');
         self.play();
       } else {
-        console.log('BBPlayer: play button pausing');
         self.state = "paused";
         self.pause();
       }
@@ -192,13 +181,10 @@
 
     // Activate rewind
     self.bbplayer.find('.bb-rewind').click(function () {
-      console.log('BBPlayer: rewind button clicked');
       var time = audioElem.currentTime;
       if (time > 1.5) {
-        console.log('BBPlayer: rewind to beginning');
         audioElem.currentTime = 0;
       } else {
-        console.log('BBPlayer: rewind loading previous track');
         self.loadPrevious();
       }
     });
@@ -206,7 +192,6 @@
 
 
   BBPlayer.prototype.init = function () {
-    console.log('BBPlayer::init: setting event handlers');
     var self = this;
     self.setAudioEventHandlers();
     self.loadSources();
@@ -219,7 +204,6 @@
   var bbplayers = [];
 
   function stopAllBBPlayers() {
-    console.log('stopAllBBPlayers: entering');
     var i = 0;
     for (i = 0; i < bbplayers.length; i++) {
       bbplayers[i].pause();
