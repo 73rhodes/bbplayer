@@ -2,7 +2,7 @@
 
 (function () {
 
-//Pad a number with leading zeros
+  //Pad a number with leading zeros
   function zeroPad(number, places) {
     var zeros = places - number.toString().length + 1;
     return new Array(+(zeros > 0 && zeros)).join("0") + number;
@@ -11,6 +11,9 @@
 
   // Convert seconds to mm:ss format
   function toTimeString(seconds) {
+    if (seconds === NaN) {
+      return "--:--";
+    }
     var minutes = Math.floor(seconds / 60);
     seconds = seconds - minutes * 60;
     return zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
@@ -28,6 +31,7 @@
   var BBPlayer = function (bbplayer) {
     this.bbplayer  = bbplayer;
     this.bbaudio   = bbplayer.find("audio");
+    this.bbaudio.get(0).preload="auto";
     this.state     = "paused"; // TODO enum states
     this.trackList = [];
     this.init();
@@ -109,7 +113,7 @@
     self.bbaudio.on('canplay', function () {
       if (self.state === 'playing') {
         $(this).get(0).play();
-      }
+       }
       self.updateDisplay();
     });
 
@@ -134,7 +138,6 @@
     var playButton = this.bbplayer.find(".bb-play");
     playButton.removeClass("bb-playing");
     playButton.addClass("bb-paused");
-
   };
 
   // Set up button click handlers
@@ -177,6 +180,7 @@
     var self = this;
     self.setAudioEventHandlers();
     self.loadSources();
+    // self.loadTrack (0);
     self.currentTrack = 0;
     self.setClickHandlers();
     self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
