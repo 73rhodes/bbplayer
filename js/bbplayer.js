@@ -2,14 +2,6 @@
 
 (function () {
 
-  if (!console || !console.log) {
-    console = {
-      log: function (msg) {
-        $(document).append(msg+"<br>\n");
-      }
-    }
-  }
-
   //Pad a number with leading zeros
   function zeroPad(number, places) {
     var zeros = places - number.toString().length + 1;
@@ -20,7 +12,6 @@
   // Convert seconds to mm:ss format
   function toTimeString(seconds) {
     if (seconds === NaN) {
-      console.log('toTimeString: seconds = ' + seconds);
       return "--:--";
     }
     var minutes = Math.floor(seconds / 60);
@@ -31,7 +22,6 @@
 
   // Parse out file name from path, unescape %20
   function parseTitle(path) {
-    //console.log('parseTitle: path = ' + path);
     path = path.replace(/%20/g, " ");
     return path.split('/').pop().split('.').shift();
   }
@@ -86,8 +76,6 @@
     var duration  = toTimeString(Math.ceil(audioElem.duration));
     var elapsed   = toTimeString(Math.ceil(audioElem.currentTime));
     var title     = parseTitle(audioElem.currentSrc);
-    console.log('BBPlayer::updateDisplay: duration: ' + duration +
-      ', elapsed: ' + elapsed);
     this.bbplayer.find('.bb-trackLength').html(duration);
     this.bbplayer.find('.bb-trackTime').html(elapsed);
     this.bbplayer.find('.bb-trackTitle').html(title);
@@ -96,7 +84,6 @@
 
   // Set current source for audio to given track number
   BBPlayer.prototype.loadTrack = function (trackNumber) {
-    console.log('BBPlayer::loadTrack: loading track ' + trackNumber);
     var audioElem = this.bbaudio.get(0);
     var source  = this.bbaudio.find("source").eq(trackNumber).attr('src');
     audioElem.src = source;
@@ -126,7 +113,6 @@
     var self = this;
     self.bbaudio.on('canplay', function () {
       if (self.state === 'playing') {
-        console.log('BBPlayer: canplay event continuing play');
         $(this).get(0).play();
        }
       self.updateDisplay();
