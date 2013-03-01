@@ -16,7 +16,7 @@ Optional styling for bbplayer elements.
   background: transparent; 
   background-image: url('../images/play.png');
   background-repeat: no-repeat;
-  background-position: 6px center;
+  background-position: 7px center;
   cursor: pointer;
 }
 
