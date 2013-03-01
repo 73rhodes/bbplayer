@@ -1,24 +1,20 @@
-bbplayer.js
-===========
+bbplayer
+========
 
 A Simple HTML5 Audio Player
 
 About
 -----
 
-bbplayer.js is a simple HTML5 Audio player that lets you add multiple source tracks to the HTML5 
-audio element and add your own controls. The focus is on keeping it 
-simple & easy to set up and customize.
+bbplayer is a simple HTML5 Audio player. With bbplayer you can:
+  * add multiple source tracks to the HTML5 audio element
+  * use your own HTML elements as control buttons, and style them however you want.
+  * put multiple players on a page but only have one play at a time.
+  * provide both MP3 and OGG formats but automatically avoid duplicate playlist entries
 
-The main features it supports are:
-
-1. Create a playlist of multiple tracks
-1. Automatically choose MP3 / OGG sources
-1. Multiple players on a page that don't all play at once
-
-The player requires jQuery (for now). You need to create elements with the right CSS classes,
-although it doesn't matter what kind of elements you use for the bbplayer controls. Also
-include the HTML5 audio element, and whatever track sources you want. Roughly:
+bbplayer uses CSS classes to work. Start with a *bbplayer* class containing controls like
+*bb-rewind*, *bb-play*, *bb-forward*, etc. and the HTML5 *audio* element. Style with CSS
+however you like, and bbplayer.js takes care of the rest.
 
     <... class="bbplayer">
       <... class="bb-rewind"></...>
@@ -35,7 +31,7 @@ include the HTML5 audio element, and whatever track sources you want. Roughly:
       </audio>
     </...>
     
-Then include **bbplayer.js**:
+Then include **jquery** and **bbplayer.js**:
 
     <script src="js/jquery.js"></script>
     <script src="js/bbplayer.js"></script>
