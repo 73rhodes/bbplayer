@@ -11,7 +11,7 @@
 
   // Convert seconds to mm:ss format
   function toTimeString(seconds) {
-    if (isNan(seconds)) {
+    if (isNaN(seconds)) {
       return "--:--";
     }
     var minutes = Math.floor(seconds / 60);
