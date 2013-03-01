@@ -38,6 +38,7 @@
   var BBPlayer = function (bbplayer) {
     this.bbplayer  = bbplayer;
     this.bbaudio   = bbplayer.find("audio");
+    this.bbaudio.get(0).preload="auto";
     this.state     = "paused"; // TODO enum states
     this.trackList = [];
     this.init();
@@ -93,11 +94,12 @@
   // Set current source for audio to given track number
   BBPlayer.prototype.loadTrack = function (trackNumber) {
     console.log('BBPlayer::loadTrack: loading track ' + trackNumber);
+    var audioElem = this.bbaudio.get(0);
     var source  = this.bbaudio.find("source").eq(trackNumber).attr('src');
-    this.bbaudio.get(0).src = source;
+    audioElem.src = source;
     this.currentTrack = trackNumber;
-    console.log('audio preload attr: ' + this.bbaudio.get(0).preload);
-    console.log('audio preload readyState: ' + this.bbaudio.get(0).readyState);
+    console.log('audio preload attr: ' + audioElem.preload);
+    console.log('audio preload readyState: ' + audioElem.readyState);
   };
 
 
