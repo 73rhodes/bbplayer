@@ -19,10 +19,7 @@
 
   // Convert seconds to mm:ss format
   function toTimeString(seconds) {
-    if (typeof seconds !== "number") {
-      console.log('toTimeString: seconds = ' + seconds);
-      return "xx:xx";
-    }
+    console.log('toTimeString: seconds = ' + seconds);
     var minutes = Math.floor(seconds / 60);
     seconds = seconds - minutes * 60;
     return zeroPad(minutes, 2) + ":" + zeroPad(seconds, 2);
