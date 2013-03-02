@@ -1,9 +1,11 @@
 /* 
 Optional styling for bbplayer elements.
 */
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 .bbplayer {
-  color: #555555;
+  font: bold 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #898989;
 }
 
 .bb-play {
@@ -11,8 +13,8 @@ Optional styling for bbplayer elements.
   vertical-align: middle;
   height: 32px;
   width:  32px;
-  border: 4px solid #CFCFCF;
-  border-radius: 19px; 
+  border: 6px solid #CFCFCF;
+  border-radius: 50%; 
   background: transparent; 
   background-image: url('../images/play.png');
   background-repeat: no-repeat;
@@ -69,4 +71,22 @@ Optional styling for bbplayer elements.
   line-height: 32px;
   display: inline-block;
   height: 32px;
+}
+
+.bb-debug {
+  height:10em;
+  width: 32em;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  overflow: auto;
+  font-weight: normal;
+  font-size: 14px/1.5;
+}
+
+.bb-label {
+  font-size: 14px/1.5;
+  font-weight: 300;
+  margin: 10px;
 }
