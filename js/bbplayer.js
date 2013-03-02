@@ -20,9 +20,9 @@
   }
 
 
-  // Parse out file name from path, unescape %20
+  // Parse out file name from path, unescape
   function parseTitle(path) {
-    path = path.replace(/%20/g, " ");
+    path = decodeURI(path);
     return path.split('/').pop().split('.').shift();
   }
 
