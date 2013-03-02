@@ -26,17 +26,24 @@
     return path.split('/').pop().split('.').shift();
   }
 
-
   // Object to represent bbplayer
   var BBPlayer = function (bbplayer) {
     this.bbplayer  = bbplayer;
     this.bbaudio   = bbplayer.find("audio");
+    this.bbdebug   = bbplayer.find(".bb-debug");
     this.bbaudio.get(0).preload="auto";
     this.state     = "paused"; // TODO enum states
     this.trackList = [];
     this.init();
   };
 
+  // Debug logger
+  BBPlayer.prototype.log = function (msg) {
+    if (this.bbdebug) {
+      this.bbdebug.append(msg + "<br>");
+      this.bbdebug.scrollTop(this.bbdebug.prop('scrollHeight') - this.bbdebug.height());
+    }
+  };
 
   // say if audio element can play file type
   BBPlayer.prototype.canPlay = function (extension) {
@@ -55,6 +62,7 @@
   // Remove duplicate and unplayable sources
   BBPlayer.prototype.loadSources = function () {
     var self = this;
+    self.log('func: loadSources');
     self.bbaudio.find("source").each(function (x) {
       var fileName  = $(this).attr('src').split('/').pop();
       var extension = fileName.split('.').pop();
@@ -87,18 +95,22 @@
     var source  = this.bbaudio.find("source").eq(trackNumber).attr('src');
     this.bbaudio.get(0).src = source;
     this.currentTrack = trackNumber;
+    this.log('func: loadTrack: loaded ' + source);
   };
 
 
   // Load next track in playlist
   BBPlayer.prototype.loadNext = function () {
-    var trackCount   = this.bbaudio.find("source").length;
-    this.loadTrack((1 + this.currentTrack) % trackCount);
+    this.log('func: loadNext');
+    var trackCount = this.bbaudio.find("source").length;
+    var newTrack   = ((1 + this.currentTrack) % trackCount);
+    this.loadTrack(newTrack);
   };
 
 
   // Load previous track in playlist
   BBPlayer.prototype.loadPrevious = function () {
+    this.log('func: loadPrevious');
     var trackCount = this.bbaudio.find('source').length;
     var newTrack = (this.currentTrack + (trackCount - 1)) % trackCount;
     this.loadTrack(newTrack);
@@ -108,10 +120,13 @@
   // Set up event handlers for audio element events
   BBPlayer.prototype.setAudioEventHandlers = function () {
 
-    // Update display and continue play when song has loaded
     var self = this;
+    self.log('func: setAudioEventHandlers');
+
+    // Update display and continue play when song has loaded
     self.bbaudio.on('canplay', function () {
-      if (self.state === 'playing') {
+      self.log('event: audio canplay');
+      if (self.state === 'playing' && $(this).get(0).paused) {
         $(this).get(0).play();
        }
       self.updateDisplay();
@@ -119,8 +134,10 @@
 
     // Load next track when current one ends
     self.bbaudio.on('ended', function () {
+      self.log('event: audio ended');
       self.loadNext();
     });
+
   };
 
 
@@ -144,15 +161,18 @@
   BBPlayer.prototype.setClickHandlers = function () {
 
     var self = this;
+    self.log('func: setClickHandlers');
     var audioElem = self.bbaudio.get(0);
 
     // Activate fast-forward
     self.bbplayer.find('.bb-forward').click(function () {
+      self.log('event: click .bb-forward');
       self.loadNext();
     });
 
     // Toggle play / pause
     self.bbplayer.find('.bb-play').click(function () {
+      self.log('event: click .bb-play');
       if (self.state === "paused") { //(audioElem.paused) {
         stopAllBBPlayers();
         self.state = "playing";
@@ -166,6 +186,7 @@
 
     // Activate rewind
     self.bbplayer.find('.bb-rewind').click(function () {
+      self.log('event: click .bb-rewind');
       var time = audioElem.currentTime;
       if (time > 1.5) {
         audioElem.currentTime = 0;
@@ -173,6 +194,13 @@
         self.loadPrevious();
       }
     });
+
+    if (self.bbdebug) {
+      self.bbdebug.click( function () {
+        $(this).empty();
+      });
+    }
+
   };
 
 
