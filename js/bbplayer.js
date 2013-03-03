@@ -2,6 +2,20 @@
 
 (function () {
 
+
+  // Track multiple players on the page
+  var bbplayers = [];
+
+
+  // Stop all other bbplayers on page when starting another
+  function stopAllBBPlayers() {
+    var i = 0;
+    for (i = 0; i < bbplayers.length; i++) {
+      bbplayers[i].pause();
+      bbplayers[i].updateDisplay();
+    }
+  }
+
   //Pad a number with leading zeros
   function zeroPad(number, places) {
     var zeros = places - number.toString().length + 1;
@@ -31,11 +45,13 @@
     this.bbplayer  = bbplayer;
     this.bbaudio   = bbplayer.find("audio");
     this.bbdebug   = bbplayer.find(".bb-debug");
-    this.bbaudio.get(0).preload="auto";
+    this.bbaudio.get(0).preload = "auto"; // seems not to preload on many mobile browsers.
     this.state     = "paused"; // TODO enum states
     this.trackList = [];
+    this.displayTimer = null;
     this.init();
   };
+
 
   // Debug logger
   BBPlayer.prototype.log = function (msg) {
@@ -44,6 +60,7 @@
       this.bbdebug.scrollTop(this.bbdebug.prop('scrollHeight') - this.bbdebug.height());
     }
   };
+
 
   // say if audio element can play file type
   BBPlayer.prototype.canPlay = function (extension) {
@@ -128,7 +145,7 @@
       self.log('event: audio canplay');
       if (self.state === 'playing' && $(this).get(0).paused) {
         $(this).get(0).play();
-       }
+      }
       self.updateDisplay();
     });
 
@@ -141,21 +158,33 @@
   };
 
 
+  // Change BBPlayer to play state
   BBPlayer.prototype.play = function () {
-    this.bbaudio.get(0).play();
-    this.state = "playing";
-    var playButton = this.bbplayer.find(".bb-play");
+    stopAllBBPlayers();
+    var self = this;
+    self.log('func: play');
+    self.bbaudio.get(0).play();
+    self.state = "playing";
+    var playButton = self.bbplayer.find(".bb-play");
     playButton.removeClass("bb-paused");
     playButton.addClass("bb-playing");
+    // Start updating the display each second
+    self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
   };
 
+
+  // Change BBPlayer to pause state
   BBPlayer.prototype.pause = function () {
+    this.log('func: pause');
     this.bbaudio.get(0).pause();
     this.state = "paused";
     var playButton = this.bbplayer.find(".bb-play");
     playButton.removeClass("bb-playing");
     playButton.addClass("bb-paused");
+    // Stop updating the display each second
+    clearInterval(this.displayTimer);
   };
+
 
   // Set up button click handlers
   BBPlayer.prototype.setClickHandlers = function () {
@@ -174,11 +203,8 @@
     self.bbplayer.find('.bb-play').click(function () {
       self.log('event: click .bb-play');
       if (self.state === "paused") { //(audioElem.paused) {
-        stopAllBBPlayers();
-        self.state = "playing";
         self.play();
       } else {
-        self.state = "paused";
         self.pause();
       }
       self.updateDisplay();
@@ -196,7 +222,7 @@
     });
 
     if (self.bbdebug) {
-      self.bbdebug.click( function () {
+      self.bbdebug.click(function () {
         $(this).empty();
       });
     }
@@ -204,6 +230,7 @@
   };
 
 
+  // BBPlayer initialisation
   BBPlayer.prototype.init = function () {
     var self = this;
     self.setAudioEventHandlers();
@@ -211,19 +238,13 @@
     // self.loadTrack (0);
     self.currentTrack = 0;
     self.setClickHandlers();
-    self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
+    // Don't bother updating display every second unless we are playing
+    self.updateDisplay();
+    //self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
   };
 
-  var bbplayers = [];
 
-  function stopAllBBPlayers() {
-    var i = 0;
-    for (i = 0; i < bbplayers.length; i++) {
-      bbplayers[i].pause();
-      bbplayers[i].updateDisplay();
-    }
-  }
-
+  // Create BBPlayer Object for each element of .bbplayer class
   $(document).ready(function () {
     $(".bbplayer").each(function (x) {
       bbplayers[x] = new BBPlayer($(this));
