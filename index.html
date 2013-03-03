@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>bbplayer by darrenderidder</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="css/bbplayer.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>bbplayer</h1>
+        <p>A Simple HTML5 Audio Player.</p>
+        <p class="view"><a href="https://github.com/darrenderidder/bbplayer">View the Project on GitHub <small>darrenderidder/bbplayer</small></a></p>
+        <ul>
+          <li><a href="https://github.com/darrenderidder/bbplayer/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/darrenderidder/bbplayer/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/darrenderidder/bbplayer">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>bbplayer</h3>
+
+<p>bbplayer.js is a basic HTML5 Audio player script that lets you add a playlist of multiple source tracks to the audio element and use your own CSS styled controls.</p>
+
+<p class="bbplayer">
+  <span class="bb-rewind"></span>
+  <span class="bb-play"></span>
+  <span class="bb-forward"></span>
+  <span   class="bb-trackTime">00:00</span> /
+  <span   class="bb-trackLength">--:--</span>
+  <span   class="bb-trackTitle"></span>
+  <audio>
+    <source src="media/Blue Browne.mp3" type="audio/mpeg"/>
+    <source src="media/Blue Browne.ogg" type="audio/ogg"/>
+    <source src="media/Georgia.mp3" type="audio/mpeg"/>
+    <source src="media/Georgia.ogg" type="audio/ogg"/>
+  </audio>
+</p>
+
+<pre><code>&lt;div class="bbplayer"&gt;
+  &lt;button class="bb-rewind"&gt;rew&lt;/button&gt;
+  &lt;button class="bb-play"&gt;play&lt;/button&gt;
+  &lt;button class="bb-forward"&gt;ff&lt;/button&gt;
+  &lt;span class="bb-trackTime"&gt;--:--&lt;/span&gt; / 
+  &lt;span class="bb-trackLength"&gt;--:--&lt;/span&gt;
+  &lt;span class="bb-trackTitle"&gt;&lt;/span&gt;
+  &lt;audio&gt;
+    &lt;source src="media/Blue Browne.mp3" type="audio/mpeg"&gt;&lt;/source&gt;
+    &lt;source src="media/Blue Browne.ogg" type="audio/ogg"&gt;&lt;/source&gt;
+    &lt;source src="media/Georgia.mp3" type="audio/mpeg"&gt;&lt;/source&gt;
+    &lt;source src="media/Georgia.ogg" type="audio/ogg"&gt;&lt;/source&gt;
+    &lt;source src="media/Poinciana.mp3" type="audio/mpeg"&gt;&lt;/source&gt;
+    &lt;source src="media/Poinciana.ogg" type="audio/ogg"&gt;&lt;/source&gt;
+    HTML5 Audio Not Available
+  &lt;/audio&gt;
+&lt;/div&gt;
+&lt;script src="http://code.jquery.com/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="js/bbplayer.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Music by <a href="http://brianbrowne.com">Brian Browne</a></p>
+
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/darrenderidder">darrenderidder</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-2831300-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+          <script src="http://code.jquery.com/jquery.js"></script>
+          <script src="js/bbplayer.js"></script>
+  </body>
+</html>
