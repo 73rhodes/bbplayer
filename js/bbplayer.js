@@ -2,6 +2,20 @@
 
 (function () {
 
+
+  // Track multiple players on the page
+  var bbplayers = [];
+
+
+  // Stop all other bbplayers on page when starting another
+  function stopAllBBPlayers() {
+    var i = 0;
+    for (i = 0; i < bbplayers.length; i++) {
+      bbplayers[i].pause();
+      bbplayers[i].updateDisplay();
+    }
+  }
+
   //Pad a number with leading zeros
   function zeroPad(number, places) {
     var zeros = places - number.toString().length + 1;
@@ -20,9 +34,9 @@
   }
 
 
-  // Parse out file name from path, unescape %20
+  // Parse out file name from path, unescape
   function parseTitle(path) {
-    path = path.replace(/%20/g, " ");
+    path = decodeURI(path);
     return path.split('/').pop().split('.').shift();
   }
 
@@ -31,11 +45,12 @@
     this.bbplayer  = bbplayer;
     this.bbaudio   = bbplayer.find("audio");
     this.bbdebug   = bbplayer.find(".bb-debug");
-    this.bbaudio.get(0).preload="auto";
+    this.bbaudio.get(0).preload = "auto"; // seems not to preload on many mobile browsers.
     this.state     = "paused"; // TODO enum states
     this.trackList = [];
     this.init();
   };
+
 
   // Debug logger
   BBPlayer.prototype.log = function (msg) {
@@ -44,6 +59,7 @@
       this.bbdebug.scrollTop(this.bbdebug.prop('scrollHeight') - this.bbdebug.height());
     }
   };
+
 
   // say if audio element can play file type
   BBPlayer.prototype.canPlay = function (extension) {
@@ -123,13 +139,29 @@
     var self = this;
     self.log('func: setAudioEventHandlers');
 
+    self.bbaudio.on('abort', function () {
+      self.log('event: audio abort');
+    });
+
     // Update display and continue play when song has loaded
     self.bbaudio.on('canplay', function () {
       self.log('event: audio canplay');
       if (self.state === 'playing' && $(this).get(0).paused) {
         $(this).get(0).play();
-       }
+      }
       self.updateDisplay();
+    });
+
+    self.bbaudio.on('canplaythrough', function () {
+      self.log('event: audio canplaythrough');
+    });
+
+    self.bbaudio.on('durationchange', function () {
+      self.log('event: audio durationchange');
+    });
+
+    self.bbaudio.on('emptied', function () {
+      self.log('event: audio emptied');
     });
 
     // Load next track when current one ends
@@ -138,24 +170,97 @@
       self.loadNext();
     });
 
+    self.bbaudio.on('error', function () {
+      self.log('event: audio error');
+    });
+
+    self.bbaudio.on('loadeddata', function () {
+      self.log('event: audio loadeddata');
+    });
+
+    self.bbaudio.on('loadedmetadata', function () {
+      self.log('event: audio loadedmetadata');
+    });
+
+    self.bbaudio.on('loadstart', function () {
+      self.log('event: audio loadstart');
+    });
+
+    self.bbaudio.on('pause', function () {
+      self.log('event: audio pause');
+    });
+
+    self.bbaudio.on('play', function () {
+      self.log('event: audio play');
+    });
+
+    self.bbaudio.on('playing', function () {
+      self.log('event: audio playing');
+    });
+
+    self.bbaudio.on('progress', function () {
+      self.log('event: audio progress');
+    });
+
+    self.bbaudio.on('ratechange', function () {
+      self.log('event: audio ratechange');
+    });
+
+    self.bbaudio.on('seeked', function () {
+      self.log('event: audio seeked');
+    });
+
+    self.bbaudio.on('seeking', function () {
+      self.log('event: audio seeking');
+    });
+
+    self.bbaudio.on('stalled', function () {
+      self.log('event: audio stalled');
+    });
+
+    self.bbaudio.on('suspend', function () {
+      self.log('event: audio suspend');
+    });
+
+    self.bbaudio.on('timeupdate', function () {
+      // self.log('event: audio timeupdate');
+      self.updateDisplay();
+    });
+
+    self.bbaudio.on('volumechange', function () {
+      self.log('event: audio volumechange');
+    });
+
+    self.bbaudio.on('waiting', function () {
+      self.log('event: audio waiting');
+    });
+
   };
 
 
+  // Change BBPlayer to play state
   BBPlayer.prototype.play = function () {
-    this.bbaudio.get(0).play();
-    this.state = "playing";
-    var playButton = this.bbplayer.find(".bb-play");
+    stopAllBBPlayers();
+    var self = this;
+    self.log('func: play');
+    self.bbaudio.get(0).play();
+    self.state = "playing";
+    var playButton = self.bbplayer.find(".bb-play");
     playButton.removeClass("bb-paused");
     playButton.addClass("bb-playing");
   };
 
+
+  // Change BBPlayer to pause state
   BBPlayer.prototype.pause = function () {
+    this.log('func: pause');
     this.bbaudio.get(0).pause();
     this.state = "paused";
     var playButton = this.bbplayer.find(".bb-play");
     playButton.removeClass("bb-playing");
     playButton.addClass("bb-paused");
   };
+
 
   // Set up button click handlers
   BBPlayer.prototype.setClickHandlers = function () {
@@ -174,11 +279,8 @@
     self.bbplayer.find('.bb-play').click(function () {
       self.log('event: click .bb-play');
       if (self.state === "paused") { //(audioElem.paused) {
-        stopAllBBPlayers();
-        self.state = "playing";
         self.play();
       } else {
-        self.state = "paused";
         self.pause();
       }
       self.updateDisplay();
@@ -195,8 +297,9 @@
       }
     });
 
+    // TODO make debug more "pluggy".
     if (self.bbdebug) {
-      self.bbdebug.click( function () {
+      self.bbdebug.click(function () {
         $(this).empty();
       });
     }
@@ -204,6 +307,7 @@
   };
 
 
+  // BBPlayer initialisation
   BBPlayer.prototype.init = function () {
     var self = this;
     self.setAudioEventHandlers();
@@ -211,19 +315,11 @@
     // self.loadTrack (0);
     self.currentTrack = 0;
     self.setClickHandlers();
-    self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
+    self.updateDisplay();
   };
 
-  var bbplayers = [];
 
-  function stopAllBBPlayers() {
-    var i = 0;
-    for (i = 0; i < bbplayers.length; i++) {
-      bbplayers[i].pause();
-      bbplayers[i].updateDisplay();
-    }
-  }
-
+  // Create BBPlayer Object for each element of .bbplayer class
   $(document).ready(function () {
     $(".bbplayer").each(function (x) {
       bbplayers[x] = new BBPlayer($(this));
