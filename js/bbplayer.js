@@ -48,7 +48,6 @@
     this.bbaudio.get(0).preload = "auto"; // seems not to preload on many mobile browsers.
     this.state     = "paused"; // TODO enum states
     this.trackList = [];
-    this.displayTimer = null;
     this.init();
   };
 
@@ -140,6 +139,10 @@
     var self = this;
     self.log('func: setAudioEventHandlers');
 
+    self.bbaudio.on('abort', function () {
+      self.log('event: audio abort');
+    });
+
     // Update display and continue play when song has loaded
     self.bbaudio.on('canplay', function () {
       self.log('event: audio canplay');
@@ -149,10 +152,87 @@
       self.updateDisplay();
     });
 
+    self.bbaudio.on('canplaythrough', function () {
+      self.log('event: audio canplaythrough');
+    });
+
+    self.bbaudio.on('durationchange', function () {
+      self.log('event: audio durationchange');
+    });
+
+    self.bbaudio.on('emptied', function () {
+      self.log('event: audio emptied');
+    });
+
     // Load next track when current one ends
     self.bbaudio.on('ended', function () {
       self.log('event: audio ended');
       self.loadNext();
+    });
+
+    self.bbaudio.on('error', function () {
+      self.log('event: audio error');
+    });
+
+    self.bbaudio.on('loadeddata', function () {
+      self.log('event: audio loadeddata');
+    });
+
+    self.bbaudio.on('loadedmetadata', function () {
+      self.log('event: audio loadedmetadata');
+    });
+
+    self.bbaudio.on('loadstart', function () {
+      self.log('event: audio loadstart');
+    });
+
+    self.bbaudio.on('pause', function () {
+      self.log('event: audio pause');
+    });
+
+    self.bbaudio.on('play', function () {
+      self.log('event: audio play');
+    });
+
+    self.bbaudio.on('playing', function () {
+      self.log('event: audio playing');
+    });
+
+    self.bbaudio.on('progress', function () {
+      self.log('event: audio progress');
+    });
+
+    self.bbaudio.on('ratechange', function () {
+      self.log('event: audio ratechange');
+    });
+
+    self.bbaudio.on('seeked', function () {
+      self.log('event: audio seeked');
+    });
+
+    self.bbaudio.on('seeking', function () {
+      self.log('event: audio seeking');
+    });
+
+    self.bbaudio.on('stalled', function () {
+      self.log('event: audio stalled');
+    });
+
+    self.bbaudio.on('suspend', function () {
+      self.log('event: audio suspend');
+    });
+
+    self.bbaudio.on('timeupdate', function () {
+      // self.log('event: audio timeupdate');
+      self.updateDisplay();
+    });
+
+    self.bbaudio.on('volumechange', function () {
+      self.log('event: audio volumechange');
+    });
+
+    self.bbaudio.on('waiting', function () {
+      self.log('event: audio waiting');
     });
 
   };
@@ -168,8 +248,6 @@
     var playButton = self.bbplayer.find(".bb-play");
     playButton.removeClass("bb-paused");
     playButton.addClass("bb-playing");
-    // Start updating the display each second
-    self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
   };
 
 
@@ -181,8 +259,6 @@
     var playButton = this.bbplayer.find(".bb-play");
     playButton.removeClass("bb-playing");
     playButton.addClass("bb-paused");
-    // Stop updating the display each second
-    clearInterval(this.displayTimer);
   };
 
 
@@ -221,6 +297,7 @@
       }
     });
 
+    // TODO make debug more "pluggy".
     if (self.bbdebug) {
       self.bbdebug.click(function () {
         $(this).empty();
@@ -238,9 +315,7 @@
     // self.loadTrack (0);
     self.currentTrack = 0;
     self.setClickHandlers();
-    // Don't bother updating display every second unless we are playing
     self.updateDisplay();
-    //self.displayTimer = setInterval(function () { self.updateDisplay(); }, 1000);
   };
 
 
