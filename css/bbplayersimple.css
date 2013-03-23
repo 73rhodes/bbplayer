@@ -9,9 +9,12 @@ Optional styling for bbplayer elements.
   color: #898989;
 }
 
+.bbplayer span {
+  vertical-align: middle;
+}
+
 .bb-play {
   display: inline-block;
-  vertical-align: middle;
   height: 32px;
   width:  32px;
   border: 6px solid #CFCFCF;
@@ -24,13 +27,11 @@ Optional styling for bbplayer elements.
 }
 
 .bb-playing {
-  vertical-align: middle;
   background-image: url('../images/pause.png');
   background-position: center center;
 }
 
 .bb-forward {
-  vertical-align: middle;
   display: inline-block;
   height: 32px;
   width:  32px;
@@ -42,7 +43,6 @@ Optional styling for bbplayer elements.
 }
 
 .bb-rewind {
-  vertical-align: middle;
   display: inline-block;
   height: 32px;
   width:  32px;
@@ -55,21 +55,18 @@ Optional styling for bbplayer elements.
 
 .bb-trackTime {
   display: inline-block;
-  vertical-align: middle;
   font-size: 18px;
   line-height: 30px;
 }
 
 .bb-trackLength {
   display: inline-block;
-  vertical-align: middle;
   font-size: 18px;
   line-height: 30px;
 }
 
 .bb-trackTitle {
   display: inline-block;
-  vertical-align: middle;
   font-weight: bold;
   width: 7em;
   overflow: hidden;
