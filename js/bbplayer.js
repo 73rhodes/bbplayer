@@ -238,7 +238,7 @@
 
     self.bbaudio.on('timeupdate', function () {
       // self.log('event: audio timeupdate');
-      self.updateDisplayTimer();
+      self.updateDisplay();
     });
 
     self.bbaudio.on('volumechange', function () {
