@@ -1,0 +1,78 @@
+@charset 'UTF-8';
+/* 
+Optional styling for bbplayer elements.
+*/
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
+.bbplayer {
+  font: 200 20px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #898989;
+}
+
+.bb-play {
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  width:  32px;
+  border: 6px solid #CFCFCF;
+  border-radius: 50%; 
+  background: transparent; 
+  background-image: url('../images/play.png');
+  background-repeat: no-repeat;
+  background-position: 7px center;
+  cursor: pointer;
+}
+
+.bb-playing {
+  vertical-align: middle;
+  background-image: url('../images/pause.png');
+  background-position: center center;
+}
+
+.bb-forward {
+  vertical-align: middle;
+  display: inline-block;
+  height: 32px;
+  width:  32px;
+  background: transparent;
+  background-image: url('../images/forward.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.bb-rewind {
+  vertical-align: middle;
+  display: inline-block;
+  height: 32px;
+  width:  32px;
+  background: transparent;
+  background-image: url('../images/rewind.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.bb-trackTime {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.bb-trackLength {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.bb-trackTitle {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: bold;
+  width: 7em;
+  overflow: hidden;
+  padding-bottom: 3px;
+  padding-left: 10px;
+}
