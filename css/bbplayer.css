@@ -1,10 +1,11 @@
+@charset 'UTF-8';
 /* 
 Optional styling for bbplayer elements.
 */
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 .bbplayer {
-  font: bold 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font: 200 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #898989;
 }
 
@@ -53,24 +54,44 @@ Optional styling for bbplayer elements.
 }
 
 .bb-trackTime {
-  vertical-align: middle;
-  line-height: 32px;
   display: inline-block;
-  height: 32px;
+  vertical-align: top;
+  font-size: 14px;
 }
 
 .bb-trackLength {
-  vertical-align: middle;
-  line-height: 32px;
   display: inline-block;
-  height: 32px;
+  vertical-align: top;
+  font-size: 14px;
 }
 
 .bb-trackTitle {
-  vertical-align: middle;
-  line-height: 32px;
   display: inline-block;
-  height: 32px;
+  vertical-align: top;
+  font-weight: bold;
+  width: 7em;
+  overflow: hidden;
+  text-align: center;
+}
+
+.bb-artist {
+  font-size: 14px;
+}
+
+.bb-album {
+  font-size: 14px;
+}
+
+.bb-albumCover {
+  height: 38px;
+  width: 38px;
+  line-height: 38px;
+  vertical-align: top;
+  background: #999999;
+  border: 1px solid #666666;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  margin-left: 5px;
+  display: inline-block;
 }
 
 .bb-debug {
@@ -89,4 +110,18 @@ Optional styling for bbplayer elements.
   font-size: 14px/1.5;
   font-weight: 300;
   margin: 10px;
+}
+
+.bbplayer div.playerWindow {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.bbplayer div.playerOuterWindow {
+  display: inline-block;
+  vertical-align: top;
+  padding: 3px;
 }

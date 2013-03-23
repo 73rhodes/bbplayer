@@ -100,9 +100,23 @@
     var duration  = toTimeString(Math.ceil(audioElem.duration));
     var elapsed   = toTimeString(Math.ceil(audioElem.currentTime));
     var title     = parseTitle(audioElem.currentSrc);
+    var image     = this.bbplayer.find('source').eq(this.currentTrack).attr('data-image');
     this.bbplayer.find('.bb-trackLength').html(duration);
     this.bbplayer.find('.bb-trackTime').html(elapsed);
     this.bbplayer.find('.bb-trackTitle').html(title);
+    this.bbplayer.find('.bb-albumCover').css({
+      'background-image': "url('" + image + "')",
+      'background-size': '100% 100%',
+      'background-repeat': 'no-repeat'
+    });
+  };
+
+
+  // Update just the timer portion of the display
+  BBPlayer.prototype.updateDisplayTime = function () {
+    var audioElem = this.bbaudio.get(0);
+    var elapsed   = toTimeString(Math.ceil(audioElem.currentTime));
+    this.bbplayer.find('.bb-trackTime').html(elapsed);
   };
 
 
@@ -224,7 +238,7 @@
 
     self.bbaudio.on('timeupdate', function () {
       // self.log('event: audio timeupdate');
-      self.updateDisplay();
+      self.updateDisplayTimer();
     });
 
     self.bbaudio.on('volumechange', function () {

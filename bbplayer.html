@@ -7,14 +7,25 @@
   <body>
     <div class="bbplayer">
       <span class="bb-rewind"></span><span class="bb-play"></span><span class="bb-forward"></span>
-      <span class="bb-trackTime">--:--</span> /
-      <span class="bb-trackLength">--:--</span>
-      <span class="bb-trackTitle">&nbsp;</span>
+      <div class="playerOuterWindow">
+        <div class="playerWindow">
+          <div>
+            <span class="bb-trackTime">--:--</span>
+            <span class="bb-trackTitle">&nbsp;</span>
+            <span class="bb-trackLength">--:--</span>
+          </div>
+          <div>
+            <span class="bb-artist">Brian Browne Trio</span> -
+            <span class="bb-album">Blue Browne</span>
+          </div>
+        </div>
+        <span class="bb-albumCover">&nbsp;</span>
+      </div>
       <audio>
-        <source src="media/Blue Browne.ogg" type="audio/ogg"></source>
-        <source src="media/Blue Browne.mp3" type="audio/mpeg"></source>
-        <source src="media/Georgia.ogg" type="audio/ogg"></source>
-        <source src="media/Georgia.mp3" type="audio/mpeg"></source>
+        <source src="media/Blue Browne.ogg" type="audio/ogg" data-album="Blue Browne" data-artist="Brian Browne Trio" data-image="media/Blue Browne small.jpg"></source>
+        <source src="media/Blue Browne.mp3" type="audio/mpeg" data-album="Blue Browne" data-artist="Brian Browne Trio" data-image="media/Blue Browne small.jpg"></source>
+        <source src="media/Georgia.ogg" type="audio/ogg" data-album="Blue Browne" data-artist="Brian Browne Trio" data-image="media/Beatles small.jpg"></source>
+        <source src="media/Georgia.mp3" type="audio/mpeg" data-album="Blue Browne" data-artist="Brian Browne Trio" data-image="media/Beatles small.jpg"></source>
         HTML5 Audio Not Available
       </audio>
       <div class="bb-label">Optional debug panel:</div>
