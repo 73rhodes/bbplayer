@@ -6,7 +6,7 @@ A Modern, Minimalist HTML5 Audio Player
 About
 -----
 
-Minio Player is a minimalist HTML5 Audio player. With bbplayer you can:
+Minio Player is a minimalist HTML5 Audio player. With Minio you can:
   * make a playlist of tracks inside the HTML5 audio element
   * design your own control buttons, or use the ones included
   * put more than one player on a page, but make them play one at a time
