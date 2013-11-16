@@ -36,4 +36,4 @@ Then include **jquery** and **bbplayer.js**:
     <script src="js/jquery.js"></script>
     <script src="js/bbplayer.js"></script>
 
-See **bbplayer.html** or visit http://darrenderidder.github.com/bbplayer for an example.
+See **bbplayer.html** or visit http://darrenderidder.github.com/minio for an example.
