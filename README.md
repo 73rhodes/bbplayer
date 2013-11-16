@@ -1,18 +1,18 @@
-bbplayer
-========
+Minio Player
+============
 
-An elegant HTML5 Audio Player
+A Modern, Minimalist HTML5 Audio Player
 
 About
 -----
 
-BBplayer is a minimalist HTML5 Audio player. With bbplayer you can:
+Minio Player is a minimalist HTML5 Audio player. With bbplayer you can:
   * make a playlist of tracks inside the HTML5 audio element
   * design your own control buttons, or use the ones included
   * put more than one player on a page, but make them play one at a time
   * support all browsers with MP3 and OGG formats
 
-BBplayer uses CSS classes. Start with a *bbplayer* class containing controls like
+Minio Player uses CSS classes. Start with a *bbplayer* class containing controls like
 *bb-rewind*, *bb-play*, *bb-forward*, etc. and the HTML5 *audio* element; bbplayer.js
 takes care of the rest.
 
