@@ -46,3 +46,7 @@ FAQ
 _Why is it called bbplayer?_
 
 I made it for my piano teacher's web site, brianbrowne.com.
+
+_Does it have Flash fallback?_
+
+Nope.
