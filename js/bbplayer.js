@@ -85,15 +85,12 @@
     [].forEach.call(
       self.bbaudio.getElementsByTagName("source"),
       function (elem) {
-        console.log(elem.src);
         var fileName  = elem.getAttribute('src').split('/').pop();
         var extension = fileName.split('.').pop();
         var trackName = fileName.split('.').shift();
         var playable  = self.canPlay(extension);
-        console.log("fileName:" + fileName + ", extension:" + extension + ", trackName:" + trackName + ", playable:" + playable + ", trackList:" + self.trackList);
         if (self.trackList.indexOf(trackName) === -1 && playable === true) {
           self.trackList.push(trackName);
-          console.log("Added " + trackName + " to trackList: " + self.trackList);
         } else {
           unused.push(elem);
         }
