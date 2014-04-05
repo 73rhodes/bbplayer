@@ -9,9 +9,9 @@ About
 -----
 
 bbplayer is a minimalist HTML5 Audio player. With bbplayer you can:
-  * make a playlist of tracks inside the HTML5 audio element
-  * design your own control buttons, or use the ones included
-  * put more than one player on a page, but make them play one at a time
+  * make a playlist of tracks
+  * design your own buttons or use the ones included
+  * put more than one player on a page, but them play one at a time
   * support all browsers with MP3 and OGG formats
 
 bbplayer uses CSS classes. Start with a *bbplayer* class containing controls like
@@ -33,9 +33,8 @@ takes care of the rest.
       </audio>
     </...>
     
-Then include **jquery** and **bbplayer.js**:
+Then include **bbplayer.js**:
 
-    <script src="js/jquery.js"></script>
     <script src="js/bbplayer.js"></script>
 
 See **bbplayer.html** or visit http://darrenderidder.github.com/bbplayer for an example.

@@ -41,33 +41,34 @@
   }
 
   // Object to represent bbplayer
-  var BBPlayer = function (bbplayer) {
-    this.bbplayer  = bbplayer;
-    this.bbaudio   = bbplayer.find("audio");
-    this.bbdebug   = bbplayer.find(".bb-debug");
-    this.bbaudio.get(0).preload = "auto"; // seems not to preload on many mobile browsers.
-    this.state     = "paused"; // TODO enum states
+  var BBPlayer = function (elem) {
+    this.bbplayer  = elem;
+    this.bbaudio   = elem.getElementsByTagName("audio").item(0);
+    this.bbdebug   = elem.getElementsByClassName("bb-debug").item(0);
+    this.bbaudio.setAttribute("preload", "auto");
+    this.state     = "paused";
     this.trackList = [];
     this.init();
-  };
+  }
 
 
   // Debug logger
   BBPlayer.prototype.log = function (msg) {
     if (this.bbdebug) {
-      this.bbdebug.append(msg + "<br>");
-      this.bbdebug.scrollTop(this.bbdebug.prop('scrollHeight') - this.bbdebug.height());
+      this.bbdebug.appendChild(document.createTextNode(msg));
+      this.bbdebug.appendChild(document.createElement('br'));
+      this.bbdebug.scrollTop = (this.bbdebug.scrollHeight - this.bbdebug.clientHeight);
+      // need to review this
     }
   };
 
 
   // say if audio element can play file type
   BBPlayer.prototype.canPlay = function (extension) {
-    var audioElem = this.bbaudio.get(0);
-    if ((/mp3/i).test(extension) && audioElem.canPlayType('audio/mpeg')) {
+    if ((/mp3/i).test(extension) && this.bbaudio.canPlayType('audio/mpeg')) {
       return true;
     }
-    if ((/ogg/i).test(extension) && audioElem.canPlayType('audio/ogg')) {
+    if ((/ogg/i).test(extension) && this.bbaudio.canPlayType('audio/ogg')) {
       return true;
     }
     return false;
@@ -78,38 +79,51 @@
   // Remove duplicate and unplayable sources
   BBPlayer.prototype.loadSources = function () {
     var self = this;
+    var unused = [];
     self.log('func: loadSources');
-    self.bbaudio.find("source").each(function (x) {
-      var fileName  = $(this).attr('src').split('/').pop();
-      var extension = fileName.split('.').pop();
-      var trackName = fileName.split('.').shift();
-      var playable  = self.canPlay(extension);
-      var audioElem = self.bbaudio.get(0);
-      if ($.inArray(trackName, self.trackList) === -1 && playable === true) {
-        self.trackList.push(trackName);
-      } else {
-        $(this).remove();
+    var sources = self.bbaudio.getElementsByTagName("source");
+    [].forEach.call(
+      self.bbaudio.getElementsByTagName("source"),
+      function (elem) {
+        console.log(elem.src);
+        var fileName  = elem.getAttribute('src').split('/').pop();
+        var extension = fileName.split('.').pop();
+        var trackName = fileName.split('.').shift();
+        var playable  = self.canPlay(extension);
+        console.log("fileName:" + fileName + ", extension:" + extension + ", trackName:" + trackName + ", playable:" + playable + ", trackList:" + self.trackList);
+        if (self.trackList.indexOf(trackName) === -1 && playable === true) {
+          self.trackList.push(trackName);
+          console.log("Added " + trackName + " to trackList: " + self.trackList);
+        } else {
+          unused.push(elem);
+        }
       }
-    });
+    );
+    [].forEach.call(
+      unused,
+      function (x) {
+        x.remove();
+      }
+    );
   };
 
 
   // Update display
   BBPlayer.prototype.updateDisplay = function () {
-    var audioElem = this.bbaudio.get(0);
+    var audioElem = this.bbaudio;
     var duration  = toTimeString(Math.ceil(audioElem.duration));
     var elapsed   = toTimeString(Math.ceil(audioElem.currentTime));
     var title     = parseTitle(audioElem.currentSrc);
-    this.bbplayer.find('.bb-trackLength').html(duration);
-    this.bbplayer.find('.bb-trackTime').html(elapsed);
-    this.bbplayer.find('.bb-trackTitle').html(title);
+    this.bbplayer.getElementsByClassName('bb-trackLength').item(0).innerHTML = duration;
+    this.bbplayer.getElementsByClassName('bb-trackTime').item(0).innerHTML = elapsed;
+    this.bbplayer.getElementsByClassName('bb-trackTitle').item(0).innerHTML = title;
   };
 
 
   // Set current source for audio to given track number
   BBPlayer.prototype.loadTrack = function (trackNumber) {
-    var source  = this.bbaudio.find("source").eq(trackNumber).attr('src');
-    this.bbaudio.get(0).src = source;
+    var source  = this.bbaudio.getElementsByTagName("source").item(trackNumber).getAttribute('src');
+    this.bbaudio.src = source;
     this.currentTrack = trackNumber;
     this.log('func: loadTrack: loaded ' + source);
   };
@@ -118,7 +132,7 @@
   // Load next track in playlist
   BBPlayer.prototype.loadNext = function () {
     this.log('func: loadNext');
-    var trackCount = this.bbaudio.find("source").length;
+    var trackCount = this.bbaudio.getElementsByTagName("source").length;
     var newTrack   = ((1 + this.currentTrack) % trackCount);
     this.loadTrack(newTrack);
   };
@@ -127,7 +141,7 @@
   // Load previous track in playlist
   BBPlayer.prototype.loadPrevious = function () {
     this.log('func: loadPrevious');
-    var trackCount = this.bbaudio.find('source').length;
+    var trackCount = this.bbaudio.getElementsByTagName('source').length;
     var newTrack = (this.currentTrack + (trackCount - 1)) % trackCount;
     this.loadTrack(newTrack);
   };
@@ -139,99 +153,99 @@
     var self = this;
     self.log('func: setAudioEventHandlers');
 
-    self.bbaudio.on('abort', function () {
+    self.bbaudio.addEventListener('abort', function () {
       self.log('event: audio abort');
     });
 
     // Update display and continue play when song has loaded
-    self.bbaudio.on('canplay', function () {
+    self.bbaudio.addEventListener('canplay', function () {
       self.log('event: audio canplay');
-      if (self.state === 'playing' && $(this).get(0).paused) {
-        $(this).get(0).play();
+      if (self.state === 'playing' && this.paused) {
+        this.play();
       }
       self.updateDisplay();
     });
 
-    self.bbaudio.on('canplaythrough', function () {
+    self.bbaudio.addEventListener('canplaythrough', function () {
       self.log('event: audio canplaythrough');
     });
 
-    self.bbaudio.on('durationchange', function () {
+    self.bbaudio.addEventListener('durationchange', function () {
       self.log('event: audio durationchange');
     });
 
-    self.bbaudio.on('emptied', function () {
+    self.bbaudio.addEventListener('emptied', function () {
       self.log('event: audio emptied');
     });
 
     // Load next track when current one ends
-    self.bbaudio.on('ended', function () {
+    self.bbaudio.addEventListener('ended', function () {
       self.log('event: audio ended');
       self.loadNext();
     });
 
-    self.bbaudio.on('error', function () {
+    self.bbaudio.addEventListener('error', function () {
       self.log('event: audio error');
     });
 
-    self.bbaudio.on('loadeddata', function () {
+    self.bbaudio.addEventListener('loadeddata', function () {
       self.log('event: audio loadeddata');
     });
 
-    self.bbaudio.on('loadedmetadata', function () {
+    self.bbaudio.addEventListener('loadedmetadata', function () {
       self.log('event: audio loadedmetadata');
     });
 
-    self.bbaudio.on('loadstart', function () {
+    self.bbaudio.addEventListener('loadstart', function () {
       self.log('event: audio loadstart');
     });
 
-    self.bbaudio.on('pause', function () {
+    self.bbaudio.addEventListener('pause', function () {
       self.log('event: audio pause');
     });
 
-    self.bbaudio.on('play', function () {
+    self.bbaudio.addEventListener('play', function () {
       self.log('event: audio play');
     });
 
-    self.bbaudio.on('playing', function () {
+    self.bbaudio.addEventListener('playing', function () {
       self.log('event: audio playing');
     });
 
-    self.bbaudio.on('progress', function () {
+    self.bbaudio.addEventListener('progress', function () {
       self.log('event: audio progress');
     });
 
-    self.bbaudio.on('ratechange', function () {
+    self.bbaudio.addEventListener('ratechange', function () {
       self.log('event: audio ratechange');
     });
 
-    self.bbaudio.on('seeked', function () {
+    self.bbaudio.addEventListener('seeked', function () {
       self.log('event: audio seeked');
     });
 
-    self.bbaudio.on('seeking', function () {
+    self.bbaudio.addEventListener('seeking', function () {
       self.log('event: audio seeking');
     });
 
-    self.bbaudio.on('stalled', function () {
+    self.bbaudio.addEventListener('stalled', function () {
       self.log('event: audio stalled');
     });
 
-    self.bbaudio.on('suspend', function () {
+    self.bbaudio.addEventListener('suspend', function () {
       self.log('event: audio suspend');
     });
 
-    self.bbaudio.on('timeupdate', function () {
+    self.bbaudio.addEventListener('timeupdate', function () {
       // self.log('event: audio timeupdate');
       self.updateDisplay();
     });
 
-    self.bbaudio.on('volumechange', function () {
+    self.bbaudio.addEventListener('volumechange', function () {
       self.log('event: audio volumechange');
     });
 
-    self.bbaudio.on('waiting', function () {
+    self.bbaudio.addEventListener('waiting', function () {
       self.log('event: audio waiting');
     });
 
@@ -243,22 +257,22 @@
     stopAllBBPlayers();
     var self = this;
     self.log('func: play');
-    self.bbaudio.get(0).play();
+    self.bbaudio.play();
     self.state = "playing";
-    var playButton = self.bbplayer.find(".bb-play");
-    playButton.removeClass("bb-paused");
-    playButton.addClass("bb-playing");
+    var playButton = self.bbplayer.getElementsByClassName("bb-play").item(0);
+    playButton.classList.remove("bb-paused");
+    playButton.classList.add("bb-playing");
   };
 
 
   // Change BBPlayer to pause state
   BBPlayer.prototype.pause = function () {
     this.log('func: pause');
-    this.bbaudio.get(0).pause();
+    this.bbaudio.pause();
     this.state = "paused";
-    var playButton = this.bbplayer.find(".bb-play");
-    playButton.removeClass("bb-playing");
-    playButton.addClass("bb-paused");
+    var playButton = this.bbplayer.getElementsByClassName("bb-play").item(0);
+    playButton.classList.remove("bb-playing");
+    playButton.classList.add("bb-paused");
   };
 
 
@@ -267,35 +281,51 @@
 
     var self = this;
     self.log('func: setClickHandlers');
-    var audioElem = self.bbaudio.get(0);
+    var audioElem = self.bbaudio;
 
     // Activate fast-forward
-    self.bbplayer.find('.bb-forward').click(function () {
-      self.log('event: click .bb-forward');
-      self.loadNext();
-    });
+    [].forEach.call(
+      self.bbplayer.getElementsByClassName('bb-forward'),
+      function (el) {
+        el.addEventListener('click', function () {
+          self.log('event: click .bb-forward');
+          self.loadNext();          
+        });
+      }
+    );
 
     // Toggle play / pause
-    self.bbplayer.find('.bb-play').click(function () {
-      self.log('event: click .bb-play');
-      if (self.state === "paused") { //(audioElem.paused) {
-        self.play();
-      } else {
-        self.pause();
+    [].forEach.call(
+      self.bbplayer.getElementsByClassName('bb-play'),
+      function (el) {
+        el.addEventListener('click', function () {
+          self.log('event: click .bb-play');
+          if (self.state === "paused") { //(audioElem.paused) {
+            self.play();
+          } else {
+            self.pause();
+          }
+          self.updateDisplay();
+        });
       }
-      self.updateDisplay();
-    });
+    );
 
     // Activate rewind
-    self.bbplayer.find('.bb-rewind').click(function () {
-      self.log('event: click .bb-rewind');
-      var time = audioElem.currentTime;
-      if (time > 1.5) {
-        audioElem.currentTime = 0;
-      } else {
-        self.loadPrevious();
+    [].forEach.call(
+      self.bbplayer.getElementsByClassName('bb-rewind'),
+      function (el) {
+        el.addEventListener('click', function () {
+          self.log('event: click .bb-rewind');
+          var time = audioElem.currentTime;
+          if (time > 1.5) {
+            audioElem.currentTime = 0;
+          } else {
+            self.loadPrevious();
+          }
+        });
       }
-    });
+    );
+
 
     // TODO make debug more "pluggy".
     if (self.bbdebug) {
@@ -320,10 +350,13 @@
 
 
   // Create BBPlayer Object for each element of .bbplayer class
-  $(document).ready(function () {
-    $(".bbplayer").each(function (x) {
-      bbplayers[x] = new BBPlayer($(this));
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    [].forEach.call(
+      document.getElementsByClassName("bbplayer"),
+      function (el) {
+        bbplayers.push(new BBPlayer(el));
+      }
+    );
   });
 
 }());
