@@ -49,7 +49,7 @@
     this.bbaudio   = elem.getElementsByTagName("audio").item(0);
     this.bbdebug   = elem.getElementsByClassName("bb-debug").item(0);
     this.bbaudio.setAttribute("preload", "auto");
-    this.state     = "paused";
+    this.state     = this.bbaudio.autoplay ? "playing" : "paused";
     this.trackList = [];
     this.init();
   }
@@ -120,11 +120,9 @@
     if (this.bbaudio.paused) {
       playButton.classList.remove("bb-playing");
       playButton.classList.add("bb-paused");
-      this.state = "paused";
     } else {
       playButton.classList.remove("bb-paused");
       playButton.classList.add("bb-playing");
-      this.state = "playing";
     }
   };
 
