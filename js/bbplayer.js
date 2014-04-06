@@ -3,6 +3,9 @@
 (function () {
 
 
+  // minimal config
+  var repeat = true;
+
   // Track multiple players on the page
   var bbplayers = [];
 
@@ -16,7 +19,7 @@
     }
   }
 
-  //Pad a number with leading zeros
+  // Pad a number with leading zeros
   function zeroPad(number, places) {
     var zeros = places - number.toString().length + 1;
     return new Array(+(zeros > 0 && zeros)).join("0") + number;
@@ -46,7 +49,7 @@
     this.bbaudio   = elem.getElementsByTagName("audio").item(0);
     this.bbdebug   = elem.getElementsByClassName("bb-debug").item(0);
     this.bbaudio.setAttribute("preload", "auto");
-    this.state     = "paused";
+    this.state     = this.bbaudio.autoplay ? "playing" : "paused";
     this.trackList = [];
     this.init();
   }
@@ -58,7 +61,6 @@
       this.bbdebug.appendChild(document.createTextNode(msg));
       this.bbdebug.appendChild(document.createElement('br'));
       this.bbdebug.scrollTop = (this.bbdebug.scrollHeight - this.bbdebug.clientHeight);
-      // need to review this
     }
   };
 
@@ -118,11 +120,9 @@
     if (this.bbaudio.paused) {
       playButton.classList.remove("bb-playing");
       playButton.classList.add("bb-paused");
-      this.state = "paused";
     } else {
       playButton.classList.remove("bb-paused");
       playButton.classList.add("bb-playing");
-      this.state = "playing";
     }
   };
 
@@ -145,6 +145,9 @@
     this.log('func: loadNext');
     var trackCount = this.bbaudio.getElementsByTagName("source").length;
     var newTrack   = ((1 + this.currentTrack) % trackCount);
+    if (newTrack <= this.currentTrack && !repeat) {
+      this.state = "paused";
+    }
     this.loadTrack(newTrack);
   };
 
