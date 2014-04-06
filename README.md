@@ -49,3 +49,7 @@ I made it for my piano teacher's web site, brianbrowne.com.
 _Does it have Flash fallback?_
 
 Nope.
+
+_How do I stop looping?_
+
+Change js/bbplayer.js to use `var repeat=false;`
