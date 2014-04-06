@@ -11,7 +11,7 @@
   function stopAllBBPlayers() {
     var i = 0;
     for (i = 0; i < bbplayers.length; i++) {
-      bbplayers[i].pause();
+      bbplayers[i].bbaudio.pause();
       bbplayers[i].updateDisplay();
     }
   }
@@ -114,13 +114,27 @@
     this.bbplayer.getElementsByClassName('bb-trackLength').item(0).innerHTML = duration;
     this.bbplayer.getElementsByClassName('bb-trackTime').item(0).innerHTML = elapsed;
     this.bbplayer.getElementsByClassName('bb-trackTitle').item(0).innerHTML = title;
+    var playButton = this.bbplayer.getElementsByClassName("bb-play").item(0);
+    if (this.bbaudio.paused) {
+      playButton.classList.remove("bb-playing");
+      playButton.classList.add("bb-paused");
+      this.state = "paused";
+    } else {
+      playButton.classList.remove("bb-paused");
+      playButton.classList.add("bb-playing");
+      this.state = "playing";
+    }
   };
 
 
   // Set current source for audio to given track number
   BBPlayer.prototype.loadTrack = function (trackNumber) {
-    var source  = this.bbaudio.getElementsByTagName("source").item(trackNumber).getAttribute('src');
+    var source = this.bbaudio.getElementsByTagName("source").item(trackNumber).getAttribute('src');
     this.bbaudio.src = source;
+    // don't autoplay if bbplayer state is paused
+    if (this.state === 'paused') {
+      this.bbaudio.pause();
+    } 
     this.currentTrack = trackNumber;
     this.log('func: loadTrack: loaded ' + source);
   };
@@ -249,30 +263,6 @@
   };
 
 
-  // Change BBPlayer to play state
-  BBPlayer.prototype.play = function () {
-    stopAllBBPlayers();
-    var self = this;
-    self.log('func: play');
-    self.bbaudio.play();
-    self.state = "playing";
-    var playButton = self.bbplayer.getElementsByClassName("bb-play").item(0);
-    playButton.classList.remove("bb-paused");
-    playButton.classList.add("bb-playing");
-  };
-
-
-  // Change BBPlayer to pause state
-  BBPlayer.prototype.pause = function () {
-    this.log('func: pause');
-    this.bbaudio.pause();
-    this.state = "paused";
-    var playButton = this.bbplayer.getElementsByClassName("bb-play").item(0);
-    playButton.classList.remove("bb-playing");
-    playButton.classList.add("bb-paused");
-  };
-
-
   // Set up button click handlers
   BBPlayer.prototype.setClickHandlers = function () {
 
@@ -297,10 +287,13 @@
       function (el) {
         el.addEventListener('click', function () {
           self.log('event: click .bb-play');
-          if (self.state === "paused") { //(audioElem.paused) {
-            self.play();
+          if (self.bbaudio.paused) { //(audioElem.paused) {
+            stopAllBBPlayers();
+            self.bbaudio.play();
+            self.state = "playing";
           } else {
-            self.pause();
+            self.bbaudio.pause();
+            self.state = "paused";
           }
           self.updateDisplay();
         });
@@ -339,7 +332,6 @@
     var self = this;
     self.setAudioEventHandlers();
     self.loadSources();
-    // self.loadTrack (0);
     self.currentTrack = 0;
     self.setClickHandlers();
     self.updateDisplay();
