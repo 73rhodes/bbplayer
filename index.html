@@ -7,10 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <link rel="stylesheet" href="css/bbplayersimple.css">
-    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -19,8 +16,11 @@
     <div class="wrapper">
       <header>
         <h1>bbplayer</h1>
-        <p>A Simple HTML5 Audio Player.</p>
+        <p>A modern, minimalist html5 audio player.</p>
+
         <p class="view"><a href="https://github.com/darrenderidder/bbplayer">View the Project on GitHub <small>darrenderidder/bbplayer</small></a></p>
+
+
         <ul>
           <li><a href="https://github.com/darrenderidder/bbplayer/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/darrenderidder/bbplayer/tarball/master">Download <strong>TAR Ball</strong></a></li>
@@ -28,65 +28,66 @@
         </ul>
       </header>
       <section>
-        <h3>bbplayer</h3>
+        <p><a href="http://darrenderidder.github.com/bbplayer"><img src="https://lh3.ggpht.com/-tC8Zj6Bpg04/UcMquJhtiLI/AAAAAAAABgI/cXg6RtQrgMc/s1600/bbplayer.png" alt="bbplayer"></a></p>
 
-<p>bbplayer.js is a basic HTML5 Audio player script that lets you add a playlist of multiple source tracks to the audio element and use your own CSS styled controls.</p>
+<h2>
+<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
 
-<p class="bbplayer">
-  <span class="bb-rewind"></span>
-  <span class="bb-play"></span>
-  <span class="bb-forward"></span>
-  <span class="bb-trackTime">00:00</span>
-  <span> / </span>
-  <span class="bb-trackLength">--:--</span>
-  <span class="bb-trackTitle"></span>
-  <audio>
-    <source src="media/Blue Browne.mp3" type="audio/mpeg"/>
-    <source src="media/Blue Browne.ogg" type="audio/ogg"/>
-    <source src="media/Georgia.mp3" type="audio/mpeg"/>
-    <source src="media/Georgia.ogg" type="audio/ogg"/>
-  </audio>
-</p>
+<p>bbplayer is a minimalist HTML5 Audio player. With bbplayer you can:</p>
 
-<pre><code>&lt;div class="bbplayer"&gt;
-  &lt;button class="bb-rewind"&gt;rew&lt;/button&gt;
-  &lt;button class="bb-play"&gt;play&lt;/button&gt;
-  &lt;button class="bb-forward"&gt;ff&lt;/button&gt;
-  &lt;span class="bb-trackTime"&gt;--:--&lt;/span&gt; / 
-  &lt;span class="bb-trackLength"&gt;--:--&lt;/span&gt;
-  &lt;span class="bb-trackTitle"&gt;&lt;/span&gt;
-  &lt;audio&gt;
-    &lt;source src="media/Blue Browne.mp3" type="audio/mpeg"&gt;&lt;/source&gt;
-    &lt;source src="media/Blue Browne.ogg" type="audio/ogg"&gt;&lt;/source&gt;
-    &lt;source src="media/Georgia.mp3" type="audio/mpeg"&gt;&lt;/source&gt;
-    &lt;source src="media/Georgia.ogg" type="audio/ogg"&gt;&lt;/source&gt;
-    &lt;source src="media/Poinciana.mp3" type="audio/mpeg"&gt;&lt;/source&gt;
-    &lt;source src="media/Poinciana.ogg" type="audio/ogg"&gt;&lt;/source&gt;
-    HTML5 Audio Not Available
-  &lt;/audio&gt;
-&lt;/div&gt;
-&lt;script src="js/bbplayer.js"&gt;&lt;/script&gt;
-</code></pre>
+<ul>
+<li>make a playlist of tracks</li>
+<li>design your own buttons or use the ones included</li>
+<li>put more than one player on a page, but them play one at a time</li>
+<li>support all browsers with MP3 and OGG formats</li>
+</ul><p>bbplayer uses CSS classes. Start with a <em>bbplayer</em> class containing controls like
+<em>bb-rewind</em>, <em>bb-play</em>, <em>bb-forward</em>, etc. and the HTML5 <em>audio</em> element; bbplayer.js
+takes care of the rest.</p>
 
-<p>Music by <a href="http://brianbrowne.com">Brian Browne</a></p>
+<div class="highlight highlight-HTML"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bbplayer"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"bb-rewind"</span><span class="nt">&gt;&lt;/span&gt;</span>
+   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"bb-play"</span><span class="nt">&gt;&lt;/span&gt;</span>
+   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"bb-forward"</span><span class="nt">&gt;&lt;/span&gt;</span>
+   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"bb-trackTime"</span><span class="nt">&gt;&lt;/span&gt;</span>
+   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"bb-trackLength"</span><span class="nt">&gt;&lt;/span&gt;</span>
+   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"bb-trackTitle"</span><span class="nt">&gt;&lt;/span&gt;</span>
+   <span class="nt">&lt;audio&gt;</span>
+     <span class="c">&lt;!-- </span>
+<span class="c">     playlist of audio files in MP3 and</span>
+<span class="c">     OGG format for cross browser support</span>
+<span class="c">     --&gt;</span>
+     <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"media/bluebrowne.mp3"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"media/bluebrowne.ogg"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"media/georgia.mp3"</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;source</span> <span class="na">src=</span><span class="s">"media/georgia.ogg"</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/audio&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
 
+<p>Then include <strong>bbplayer.js</strong>:</p>
+
+<div class="highlight highlight-HTML"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/bbplayer.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+
+<p>See <strong>bbplayer.html</strong> or visit <a href="http://darrenderidder.github.com/bbplayer">http://darrenderidder.github.com/bbplayer</a> for an example.</p>
+
+<h2>
+<a name="faq" class="anchor" href="#faq"><span class="octicon octicon-link"></span></a>FAQ</h2>
+
+<p><em>Why is it called bbplayer?</em></p>
+
+<p>I made it for my piano teacher's web site, brianbrowne.com.</p>
+
+<p><em>Does it have Flash fallback?</em></p>
+
+<p>Nope.</p>
       </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/darrenderidder">darrenderidder</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/darrenderidder">darrenderidder</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-2831300-4");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-          <script src="js/bbplayer.js"></script>
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
