@@ -4,7 +4,7 @@
 
 
   // minimal config
-  var repeat = false;//true;
+  var repeat = true;
 
   // Track multiple players on the page
   var bbplayers = [];
