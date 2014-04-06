@@ -3,6 +3,9 @@
 (function () {
 
 
+  // minimal config
+  var repeat = false;//true;
+
   // Track multiple players on the page
   var bbplayers = [];
 
@@ -16,7 +19,7 @@
     }
   }
 
-  //Pad a number with leading zeros
+  // Pad a number with leading zeros
   function zeroPad(number, places) {
     var zeros = places - number.toString().length + 1;
     return new Array(+(zeros > 0 && zeros)).join("0") + number;
@@ -58,7 +61,6 @@
       this.bbdebug.appendChild(document.createTextNode(msg));
       this.bbdebug.appendChild(document.createElement('br'));
       this.bbdebug.scrollTop = (this.bbdebug.scrollHeight - this.bbdebug.clientHeight);
-      // need to review this
     }
   };
 
@@ -145,6 +147,9 @@
     this.log('func: loadNext');
     var trackCount = this.bbaudio.getElementsByTagName("source").length;
     var newTrack   = ((1 + this.currentTrack) % trackCount);
+    if (newTrack <= this.currentTrack && !repeat) {
+      this.state = "paused";
+    }
     this.loadTrack(newTrack);
   };
 
