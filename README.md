@@ -11,7 +11,7 @@ About
 bbplayer is a minimalist HTML5 Audio player. With bbplayer you can:
   * make a playlist of tracks
   * design your own buttons or use the ones included
-  * put more than one player on a page, but them play one at a time
+  * put several bbplayers on a page that play one at a time
   * support all browsers with MP3 and OGG formats
 
 bbplayer uses CSS classes. Start with a *bbplayer* class containing controls like
