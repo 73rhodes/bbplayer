@@ -18,9 +18,13 @@ bbplayer uses CSS classes. Start with a *bbplayer* class containing controls
 like *bb-rewind*, *bb-play*, *bb-forward*, etc. and the HTML5 *audio* element;
 bbplayer.js takes care of the rest.
 
+Include your choice of stylesheet.
+
 ```html
 <link rel="stylesheet" href="css/bbplayer.css">
 ```
+
+Add HTML elements for bbplayer.
 
 ```html
 <div class="bbplayer">
