@@ -1,0 +1,121 @@
+@charset 'UTF-8';
+/* 
+Optional styling for bbplayer elements.
+*/
+@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
+
+.bbplayer {
+  font: 200 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #898989;
+  display: inline-block;
+}
+
+.bb-play {
+  display: inline-block;
+  vertical-align: middle;
+  height: 32px;
+  width:  32px;
+  border: 6px solid #CFCFCF;
+  border-radius: 50%; 
+  background: transparent; 
+  background-image: url('../images/play.png');
+  background-repeat: no-repeat;
+  background-position: 7px center;
+  cursor: pointer;
+}
+
+.bb-playing {
+  vertical-align: middle;
+  background-image: url('../images/pause.png');
+  background-position: center center;
+}
+
+.bb-forward {
+  vertical-align: middle;
+  display: inline-block;
+  height: 32px;
+  width:  32px;
+  background: transparent;
+  background-image: url('../images/forward.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.bb-rewind {
+  vertical-align: middle;
+  display: inline-block;
+  height: 32px;
+  width:  32px;
+  background: transparent;
+  background-image: url('../images/rewind.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.bb-track-display {
+  font-size: 14pt;
+}
+
+.bb-trackTime {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.bb-trackLength {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.bb-trackTitle {
+  display: inline-block;
+  vertical-align: top;
+  font-weight: bold;
+  width: 8em;
+  overflow: hidden;
+  text-align: center;
+}
+
+.bb-album-display {
+  display: none;
+}
+
+.bb-artist {
+  font-size: 14px;
+}
+
+.bb-album {
+  font-size: 14px;
+}
+
+.bb-albumCover {
+  height: 38px;
+  width: 38px;
+  line-height: 38px;
+  vertical-align: top;
+  background: #999999;
+  border: 1px solid #666666;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.bb-debug {
+  height:10em;
+  width: 19em;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  overflow: auto;
+  font-weight: normal;
+  font-size: 14px/1.5;
+}
+
+.bbplayer div.playerWindow {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 20px;
+  text-align: center;
+}
