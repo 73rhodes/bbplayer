@@ -23,26 +23,26 @@ bbplayer.js takes care of the rest.
 ```
 
 ```html
-    <... class="bbplayer">
-      <... class="bb-rewind"></...>
-      <... class="bb-play"></...>
-      <... class="bb-forward"></...>
-      <... class="bb-trackTime"></...>
-      <... class="bb-trackLength"></...>
-      <... class="bb-trackTitle"></...>
-      <audio>
-        <source src="media/x.mp3"/>
-        <source src="media/x.ogg"/>
-        <source src="media/y.mp3"/>
-        <source src="media/y.ogg"/>
-      </audio>
-    </...>
+<div class="bbplayer">
+  <span class="bb-rewind"></span>
+  <span class="bb-play"></span>
+  <span class="bb-forward"></span>
+  <span class="bb-trackTime"></span>
+  <span class="bb-trackLength"></span>
+  <span class="bb-trackTitle"></span>
+  <audio>
+    <source src="media/x.mp3"/>
+    <source src="media/x.ogg"/>
+    <source src="media/y.mp3"/>
+    <source src="media/y.ogg"/>
+  </audio>
+</div>
 ```
     
 Then include **bbplayer.js**:
 
 ```html
-    <script src="js/bbplayer.js"></script>
+<script src="js/bbplayer.js"></script>
 ```
 
 See **bbplayer.html** or visit http://darrenderidder.github.com/bbplayer for an example.
