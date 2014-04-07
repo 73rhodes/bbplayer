@@ -100,8 +100,8 @@
     );
     [].forEach.call(
       unused,
-      function (x) {
-        x.remove();
+      function (elem) {
+        elem.parentNode.removeChild(elem);
       }
     );
   };
