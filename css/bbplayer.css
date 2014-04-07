@@ -7,6 +7,11 @@ Optional styling for bbplayer elements.
 .bbplayer {
   font: 200 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
   color: #898989;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(100,100,100,0.2);
 }
 
 .bb-play {
@@ -69,7 +74,7 @@ Optional styling for bbplayer elements.
   display: inline-block;
   vertical-align: top;
   font-weight: bold;
-  width: 7em;
+  width: 8em;
   overflow: hidden;
   text-align: center;
 }
@@ -96,7 +101,7 @@ Optional styling for bbplayer elements.
 
 .bb-debug {
   height:10em;
-  width: 32em;
+  width: 19em;
   border: 1px solid #DDD;
   border-radius: 5px;
   margin: 10px;
@@ -106,22 +111,14 @@ Optional styling for bbplayer elements.
   font-size: 14px/1.5;
 }
 
-.bb-label {
-  font-size: 14px/1.5;
-  font-weight: 300;
-  margin: 10px;
-}
-
 .bbplayer div.playerWindow {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   line-height: 20px;
   text-align: center;
   border-radius: 3px;
-}
-
-.bbplayer div.playerOuterWindow {
-  display: inline-block;
-  vertical-align: top;
-  padding: 3px;
+  border: 1px solid #CFCFCF;
+  padding: 5px;
+  box-shadow: inset 0 0 15px rgba(100,100,100,0.1);
+  background: #EFEFEF;
 }
