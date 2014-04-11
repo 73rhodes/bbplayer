@@ -34,49 +34,47 @@
 <h2>
 <a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
 
-    <div class="bbplayer">
-      <span class="bb-rewind"></span>
-      <span class="bb-play"></span>
-      <span class="bb-forward"></span>
-      <div class="playerOuterWindow">
-        <div class="playerWindow">
-          <div>
-            <span class="bb-trackTime">--:--</span>
-            <span class="bb-trackTitle">&nbsp;</span>
-            <span class="bb-trackLength">--:--</span>
-          </div>
-          <div>
-            <span class="bb-artist">Brian Browne Trio</span> -
-            <span class="bb-album">Blue Browne</span>
-          </div>
-        </div>
-        <!--span class="bb-albumCover">&nbsp;</span-->
-      </div>
-      <audio>
-        <source
-           src="media/Blue Browne.ogg" type="audio/ogg"
-           data-album="Blue Browne"
-           data-artist="Brian Browne Trio"
-           data-image="media/Blue Browne small.jpg"/>
-        <source
-           src="media/Blue Browne.mp3" type="audio/mpeg"
-           data-album="Blue Browne"
-           data-artist="Brian Browne Trio"
-           data-image="media/Blue Browne small.jpg"/>
-        <source
-           src="media/Georgia.ogg" type="audio/ogg"
-           data-album="Blue Browne"
-           data-artist="Brian Browne Trio"
-           data-image="media/Beatles small.jpg"/>
-        <source
-           src="media/Georgia.mp3" type="audio/mpeg"
-           data-album="Blue Browne"
-           data-artist="Brian Browne Trio"
-           data-image="media/Beatles small.jpg"/>
-        HTML5 Audio Not Available
-      </audio>
+<div class="bbplayer">
+  <span class="bb-rewind"></span>
+  <span class="bb-play"></span>
+  <span class="bb-forward"></span>
+  <div class="playerWindow">
+    <div>
+      <span class="bb-trackTime">--:--</span>
+      <span class="bb-trackTitle">&nbsp;</span>
+      <span class="bb-trackLength">--:--</span>
     </div>
-<br/>
+    <div>
+      <span class="bb-artist">Brian Browne Trio</span> -
+      <span class="bb-album">Blue Browne</span>
+    </div>
+  </div>
+  <!--span class="bb-albumCover">&nbsp;</span-->
+  <audio>
+    <source
+       src="media/Blue Browne.ogg" type="audio/ogg"
+       data-album="Blue Browne"
+       data-artist="Brian Browne Trio"
+       data-image="media/Blue Browne small.jpg"/>
+    <source
+       src="media/Blue Browne.mp3" type="audio/mpeg"
+       data-album="Blue Browne"
+       data-artist="Brian Browne Trio"
+       data-image="media/Blue Browne small.jpg"/>
+    <source
+       src="media/Georgia.ogg" type="audio/ogg"
+       data-album="Blue Browne"
+       data-artist="Brian Browne Trio"
+       data-image="media/Beatles small.jpg"/>
+    <source
+       src="media/Georgia.mp3" type="audio/mpeg"
+       data-album="Blue Browne"
+       data-artist="Brian Browne Trio"
+       data-image="media/Beatles small.jpg"/>
+    HTML5 Audio Not Available
+  </audio>
+</div>
+<br/><br/>
 
 <!--
         <p><a href="http://darrenderidder.github.com/bbplayer"><img src="https://lh3.ggpht.com/-tC8Zj6Bpg04/UcMquJhtiLI/AAAAAAAABgI/cXg6RtQrgMc/s1600/bbplayer.png" alt="bbplayer"></a></p>
@@ -95,6 +93,11 @@
 </ul><p>bbplayer uses CSS classes. Start with a <em>bbplayer</em> class containing controls like
 <em>bb-rewind</em>, <em>bb-play</em>, <em>bb-forward</em>, etc. and the HTML5 <em>audio</em> element; bbplayer.js
 takes care of the rest.</p>
+
+<h2>
+<a name="how-to" class="anchor" href="#how-to"><span class="octicon octicon-link"></span></a>How-to</h2>
+
+
 <p>
 Add the stylesheet in the `head` of your HTML page:
 </p>
@@ -102,8 +105,6 @@ Add the stylesheet in the `head` of your HTML page:
 <span class="nt">&lt;</span>link <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/bbplayer.css"</span><span class="nt">&gt;</span>
 </pre></div>
 
-<h2>
-<a name="how-to" class="anchor" href="#how-to"><span class="octicon octicon-link"></span></a>How-to</h2>
 <p>
 Add controls, audio and sources:
 </p>
@@ -147,6 +148,11 @@ for an example.</p>
 <p><em>Does it have Flash fallback?</em></p>
 
 <p>Nope.</p>
+
+<p><em>How do I stop looping?</em></p>
+
+<p>Change <code>var repeat = false;</code> to <code>true</code> in bbplayer.js.</p>
+
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/darrenderidder">darrenderidder</a></p>
@@ -155,5 +161,15 @@ for an example.</p>
     </div>
     <script src="javascripts/scale.fix.js"></script>
     <script src="js/bbplayer.js"></script>    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-2831300-4', 'darrenderidder.github.io');
+      ga('send', 'pageview');
+    
+    </script>
   </body>
 </html>
