@@ -3,3 +3,4 @@
 *.sublime-*
 package.json
 media/*
+google*.html
