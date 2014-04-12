@@ -2,10 +2,6 @@
 
 (function () {
 
-
-  // minimal config
-  var repeat = true;
-
   // Track multiple players on the page
   var bbplayers = [];
 
@@ -50,6 +46,8 @@
     this.bbdebug   = elem.getElementsByClassName("bb-debug").item(0);
     this.bbaudio.setAttribute("preload", "auto");
     this.state     = this.bbaudio.autoplay ? "playing" : "paused";
+    this.repeat    = this.bbaudio.loop ? true : false;
+    this.bbaudio.removeAttribute('loop'); // hijack the loop directive
     this.trackList = [];
     this.init();
   }
@@ -145,7 +143,7 @@
     this.log('func: loadNext');
     var trackCount = this.bbaudio.getElementsByTagName("source").length;
     var newTrack   = ((1 + this.currentTrack) % trackCount);
-    if (newTrack <= this.currentTrack && !repeat) {
+    if (newTrack <= this.currentTrack && !this.repeat) {
       this.state = "paused";
     }
     this.loadTrack(newTrack);

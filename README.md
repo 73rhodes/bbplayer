@@ -43,7 +43,7 @@ Add HTML elements for bbplayer.
 </div>
 ```
 
-To automatically start playing on load, use ```<audio autoplay>```.
+To automatically start playing on load, use `<audio autoplay>`.
 
 Then include **bbplayer.js**:
 
@@ -65,6 +65,10 @@ _Does it have Flash fallback?_
 
 Nope.
 
-_How do I stop looping?_
+_How do I enable continual looping?_
 
-Change js/bbplayer.js to use `var repeat=false;`
+Use `<audio loop>`.
+
+_How do I enable autoplay?_
+
+Use `<audio autoplay>`.
