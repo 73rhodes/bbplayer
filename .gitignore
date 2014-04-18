@@ -2,5 +2,4 @@
 *.ogg
 *.sublime-*
 package.json
-google*.html
 node_modules/*
