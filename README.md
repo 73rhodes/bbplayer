@@ -51,7 +51,6 @@ Then include **bbplayer.js**:
 <script src="js/bbplayer.js"></script>
 ```
 
-
 See **bbplayer.html** or visit http://darrenderidder.github.com/bbplayer for an example.
 
 FAQ
