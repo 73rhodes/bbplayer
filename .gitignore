@@ -1,5 +1,3 @@
-*.mp3
-*.ogg
 *.sublime-*
 package.json
 node_modules/*
