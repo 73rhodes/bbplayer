@@ -2,6 +2,5 @@
 *.ogg
 *.sublime-*
 package.json
-media/*
 google*.html
 node_modules/*
