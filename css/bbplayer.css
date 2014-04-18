@@ -122,3 +122,93 @@ Optional styling for bbplayer elements.
   box-shadow: inset 0 0 15px rgba(100,100,100,0.1);
   background: #EFEFEF;
 }
+
+@media all and (max-width: 640px) {
+
+  .bbplayer {
+    font: 200 14px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #898989;
+    display: inline-block;
+  }
+  .bb-trackTitle {
+    width: 6em;
+  }
+
+  .bb-track-display {
+    font-size: 12pt;
+  }
+
+  .bb-artist {
+    font-size: 12px;
+  }
+
+  .bb-album {
+    font-size: 12px;
+  }
+
+  .bb-trackLength {
+    display: none;
+  }
+
+}
+
+@media all and (max-width: 699px) {
+
+  .bbplayer {
+    font: 200 14px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #898989;
+    display: inline-block;
+  }
+
+  .bb-trackTitle {
+    width: 6em;
+  }
+
+  .bb-track-display {
+    font-size: 12pt;
+  }
+
+  .bb-artist {
+    font-size: 12px;
+  }
+
+  .bb-album {
+    font-size: 12px;
+  }
+
+  .bb-trackLength {
+    display: none;
+  }
+
+}
+
+@media all and (max-width: 480px) {
+
+  .bbplayer {
+    font: 200 14px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #898989;
+    display: inline-block;
+  }
+
+  .bb-trackTitle {
+    width: 6em;
+  }
+
+  .bb-track-display {
+    font-size: 12pt;
+  }
+
+  .bb-album-display {
+    display: none;
+  }
+
+  .bb-album {
+    font-size: 12px;
+  }
+
+  .bb-trackLength {
+    display: none;
+  }
+
+}
+
