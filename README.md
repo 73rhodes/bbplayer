@@ -1,58 +1,9 @@
-<script src="./js/bbplayer.js"></script>
 bbplayer
 ============
 
 A Modern, Minimalist HTML5 Audio Player
 
-<!--
 [![bbplayer](https://lh3.ggpht.com/-tC8Zj6Bpg04/UcMquJhtiLI/AAAAAAAABgI/cXg6RtQrgMc/s1600/bbplayer.png)](http://darrenderidder.github.com/bbplayer)
--->
-<div class="bbplayer">
-  <span class="bb-rewind"></span>
-  <span class="bb-play"></span>
-  <span class="bb-forward"></span>
-  <div class="playerWindow">
-    <div class="bb-track-display">
-      <span class="bb-trackTime">--:--</span>
-      <span class="bb-trackTitle">&nbsp;</span>
-      <span class="bb-trackLength">--:--</span>
-    </div>
-    <div class="bb-album-display">
-      <span class="bb-artist">Brian Browne Trio</span> -
-      <span class="bb-album">Blue Browne</span>
-    </div>
-  </div>
-  <!--
-  <span class="bb-albumCover">&nbsp;</span>
-  -->
-  <audio loop>
-    <source
-       src="media/Blue Browne.ogg" type="audio/ogg"
-       data-album="Blue Browne"
-       data-artist="Brian Browne Trio"
-       data-image="media/Blue Browne small.jpg"/>
-    <source
-       src="media/Blue Browne.mp3" type="audio/mpeg"
-       data-album="Blue Browne"
-       data-artist="Brian Browne Trio"
-       data-image="media/Blue Browne small.jpg"/>
-    <source
-       src="media/Georgia.ogg" type="audio/ogg"
-       data-album="Blue Browne"
-       data-artist="Brian Browne Trio"
-       data-image="media/Beatles small.jpg"/>
-    <source
-       src="media/Georgia.mp3" type="audio/mpeg"
-       data-album="Blue Browne"
-       data-artist="Brian Browne Trio"
-       data-image="media/Beatles small.jpg"/>
-    HTML5 Audio Not Available
-  </audio>
-  <!--
-  <div>Optional debug panel:</div>
-  <div class="bb-debug"></div>
-  -->
-</div>
 
 About
 -----
