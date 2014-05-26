@@ -1,3 +1,4 @@
+<script src="./js/bbplayer.js"></script>
 bbplayer
 ============
 
