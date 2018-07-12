@@ -1,8 +1,6 @@
 bbplayer
 ============
 
-[![DeepScan Grade](https://deepscan.io/api/projects/916/branches/1871/badge/grade.svg)](https://deepscan.io/dashboard/#view=project&pid=916&bid=1871)
-
 A Modern, Minimalist HTML5 Audio Player
 
 [![bbplayer](https://lh3.ggpht.com/-tC8Zj6Bpg04/UcMquJhtiLI/AAAAAAAABgI/cXg6RtQrgMc/s1600/bbplayer.png)](http://73rhodes.github.com/bbplayer)
