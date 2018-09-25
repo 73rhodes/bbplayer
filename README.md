@@ -1,3 +1,5 @@
+[![DeepScan grade](https://deepscan.io/api/projects/3278/branches/27825/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=3278&bid=27825)
+
 bbplayer
 ============
 
