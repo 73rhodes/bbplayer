@@ -1,4 +1,5 @@
 [![DeepScan grade](https://deepscan.io/api/projects/3278/branches/27825/badge/grade.svg)](https://deepscan.io/dashboard#view=project&pid=3278&bid=27825)
+<a href="https://codeclimate.com/github/73rhodes/bbplayer/maintainability"><img src="https://api.codeclimate.com/v1/badges/1defc0bcbbf553e0a88b/maintainability" /></a>
 
 bbplayer
 ============
@@ -6,6 +7,7 @@ bbplayer
 A Modern, Minimalist HTML5 Audio Player
 
 [![bbplayer](https://lh3.ggpht.com/-tC8Zj6Bpg04/UcMquJhtiLI/AAAAAAAABgI/cXg6RtQrgMc/s1600/bbplayer.png)](http://73rhodes.github.com/bbplayer)
+
 
 
 About
