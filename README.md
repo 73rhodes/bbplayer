@@ -56,7 +56,7 @@ Then include **bbplayer.js**:
 <script src="js/bbplayer.js"></script>
 ```
 
-See **bbplayer.html** or visit http://73rhodes.github.com/bbplayer for an example.
+See **bbplayer.html** or visit http://73rhodes.github.io/bbplayer for an example.
 
 FAQ
 ---
