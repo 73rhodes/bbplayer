@@ -83,7 +83,7 @@
     self.log('func: loadSources');
     var sources = self.bbaudio.getElementsByTagName("source");
     [].forEach.call(
-      self.bbaudio.getElementsByTagName("source"),
+      sources,
       function (elem) {
         var fileName  = elem.getAttribute('src').split('/').pop();
         var extension = fileName.split('.').pop();

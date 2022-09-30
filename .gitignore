@@ -1,3 +1,7 @@
 *.sublime-*
 package.json
+media/*
+javascripts/*
+stylesheets/*
 node_modules/*
+google*.html
