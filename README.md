@@ -4,7 +4,7 @@
 bbplayer
 ============
 
-A Modern, Minimalist HTML5 Audio Player
+A Modern, Minimalist HTML Audio Player
 
 [![bbplayer](https://lh3.ggpht.com/-tC8Zj6Bpg04/UcMquJhtiLI/AAAAAAAABgI/cXg6RtQrgMc/s1600/bbplayer.png)](http://73rhodes.github.io/bbplayer)
 
@@ -46,8 +46,6 @@ Add HTML elements for bbplayer.
 </div>
 ```
 
-To automatically start playing on load, use `<audio autoplay>`.
-
 Then include **bbplayer.js**:
 
 ```html
@@ -56,21 +54,6 @@ Then include **bbplayer.js**:
 
 See **bbplayer.html** or visit http://73rhodes.github.io/bbplayer for an example.
 
-FAQ
----
+To automatically start playing on load, use `<audio autoplay>`.
 
-_Why is it called bbplayer?_
-
-I made it for my piano teacher's web site, brianbrowne.com.
-
-_Does it have Flash fallback?_
-
-Nope.
-
-_How do I enable continual looping?_
-
-Use `<audio loop>`.
-
-_How do I enable autoplay?_
-
-Use `<audio autoplay>`.
+To enable continual looping, use `<audio loop>`.
