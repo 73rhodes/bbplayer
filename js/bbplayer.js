@@ -328,6 +328,47 @@
   };
 
 
+  BBPlayer.prototype.mediaSessionInit = function () {
+
+    var self = this;
+    self.log('func: mediaSessionInit');
+
+    if ("mediaSession" in navigator) {
+
+      navigator.mediaSession.setActionHandler("play", () => {
+        self.bbaudio.play();
+        self.state = "playing";
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        self.bbaudio.pause();
+        self.state = "paused";
+      });
+      navigator.mediaSession.setActionHandler("stop", () => {
+        stopAllBBPlayers();
+      });
+      // navigator.mediaSession.setActionHandler("seekbackward", () => {
+      // });
+      // navigator.mediaSession.setActionHandler("seekforward", () => {
+      // });
+      // navigator.mediaSession.setActionHandler("seekto", () => {
+      // });
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
+        self.loadPrevious();
+      });
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
+        self.loadNext();
+      });
+      // navigator.mediaSession.setActionHandler("skipad", () => {
+      // });
+      // navigator.mediaSession.setActionHandler("togglecamera", () => {
+      // });
+      // navigator.mediaSession.setActionHandler("togglemicrophone", () => {
+      // });
+      // navigator.mediaSession.setActionHandler("hangup", () => {
+      // });
+    }
+  };
+
   // BBPlayer initialisation
   BBPlayer.prototype.init = function () {
     var self = this;
@@ -336,6 +377,7 @@
     self.currentTrack = 0;
     self.setClickHandlers();
     self.updateDisplay();
+    self.mediaSessionInit();
   };
 
 
